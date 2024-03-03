@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://yoo4x08ja1yj"]
+
+[ext_resource type="Script" path="res://level/map/map.gd" id="1_m1vox"]
+[ext_resource type="PackedScene" uid="uid://d2y4s5l1bbv6o" path="res://level/map/tiles/grass_tile.tscn" id="2_6tfuj"]
+[ext_resource type="PackedScene" uid="uid://c46n1aw6mnyt1" path="res://level/map/tiles/hill.tscn" id="3_ucvyg"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_rje4m"]
+resource_name = "base"
+scenes/2/scene = ExtResource("2_6tfuj")
+scenes/3/scene = ExtResource("3_ucvyg")
+
+[sub_resource type="TileSet" id="TileSet_bxrvi"]
+tile_size = Vector2i(20, 20)
+sources/0 = SubResource("TileSetScenesCollectionSource_rje4m")
+
+[node name="Map" type="Node"]
+script = ExtResource("1_m1vox")
+
+[node name="MapGrid" type="TileMap" parent="."]
+position = Vector2(581, 309)
+tile_set = SubResource("TileSet_bxrvi")
+cell_quadrant_size = 20
+collision_animatable = true
+format = 2

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d2y4s5l1bbv6o"]
+
+[node name="GrassTile" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(20, 20)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.290196, 0.176471, 1)

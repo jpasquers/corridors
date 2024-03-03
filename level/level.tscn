@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cycgadj4q34py"]
+
+[ext_resource type="Script" path="res://level/level.gd" id="1_uxa8j"]
+[ext_resource type="PackedScene" uid="uid://yoo4x08ja1yj" path="res://level/map/map.tscn" id="2_i0nm3"]
+[ext_resource type="PackedScene" uid="uid://c7c17u32q6y6x" path="res://level/hud.tscn" id="2_r7kgt"]
+[ext_resource type="Script" path="res://level/hud.gd" id="3_ohx1s"]
+
+[node name="Level" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uxa8j")
+
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HUDLayer" instance=ExtResource("2_r7kgt")]
+script = ExtResource("3_ohx1s")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Background" type="ColorRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.0901961, 0.137255, 0.803922)
+metadata/_edit_lock_ = true
+
+[node name="MapLayer" type="CanvasLayer" parent="."]
+
+[node name="Map" parent="MapLayer" instance=ExtResource("2_i0nm3")]
