@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dsog7hemfwecs"]
+
+[node name="PathIndicator" type="Node2D"]
+
+[node name="Path" type="Line2D" parent="."]
+z_index = 3
+points = PackedVector2Array(3876, 1949)

@@ -2,16 +2,27 @@ extends Control
 
 class_name Level;
 
-var level_config: LevelConfig;
+var level_start_config: LevelStartConfig;
+var shadow: UnitType;
 
-func set_level_config(in_level_config: LevelConfig):
+func set_level_start_config(in_level_config: LevelStartConfig):
 	$MapLayer/Map.set_map_config(in_level_config.map_config);
-	level_config = in_level_config;
+	$HUDLayer/HUD/DeployableGarrison.set_boot_deployable_garrison(in_level_config.boot_deployable_garrison)
+
+	level_start_config = in_level_config;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	$MapLayer/Map.placed_unit.connect(_on_placed_unit);
+	$HUDLayer/HUD/DeployableGarrison.selected_shadow.connect(_on_selected_shadow);
 
+func _on_placed_unit(type: UnitType):
+	print("Unit placed");
+	$HUDLayer/HUD/DeployableGarrison._in_placed_unit(type);
+
+func _on_selected_shadow(type: UnitType):
+	print("Level registered select shadow");
+	$MapLayer/Map.set_shadow(type);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

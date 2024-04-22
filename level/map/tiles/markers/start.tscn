@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdb8htte4g6ok"]
+
+[ext_resource type="Texture2D" uid="uid://bdmt1ji7ewxqe" path="res://assets/start.png" id="1_1ovwy"]
+
+[node name="Start" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartIcon" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = ExtResource("1_1ovwy")

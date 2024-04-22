@@ -1,7 +1,7 @@
 
-# Base tiles are composed of a lower and upper layer. The lower layer will generally be 
-# Either wall or grass. The upper layer is generally a mod on top of the lower layer.
+# Base tiles are composed of terrain, marker, and occupant.
 class_name TileLayers;
 
-var lower_layer: int;
-var upper_layer: int;
+var terrain_tile_id: int = -1;
+var marker_tile_id: int = -1;
+var occupant = null;

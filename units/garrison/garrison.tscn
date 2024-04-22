@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bor3p85c742t6"]
+
+[ext_resource type="Script" path="res://units/garrison/garrison.gd" id="1_igyks"]
+[ext_resource type="PackedScene" uid="uid://b6ab82f75axo7" path="res://units/components/health_component.tscn" id="2_num0p"]
+[ext_resource type="PackedScene" uid="uid://b6leds2fi021r" path="res://units/components/hitbox_component.tscn" id="3_1bnef"]
+
+[node name="Garrison" type="Node2D"]
+script = ExtResource("1_igyks")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_num0p")]
+position = Vector2(0, -16)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_1bnef")]
