@@ -1,4 +1,4 @@
-extends Unit
+extends GridUnit
 
 class_name Garrison
 

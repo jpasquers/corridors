@@ -1,4 +1,4 @@
-extends UnitType
+extends GridUnitType
 class_name Swordsman
 
 func _init():

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://6hqo02kkcvp"]
+
+[ext_resource type="Texture2D" uid="uid://dinos55ubo40i" path="res://assets/checkpoint_1.png" id="1_0ur8m"]
+
+[node name="Checkpoint1" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Checkpoint1Icon" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = ExtResource("1_0ur8m")

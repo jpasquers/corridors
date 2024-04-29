@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name PathIndicator;
+
 var point_path: PackedVector2Array;
 
 func set_point_path(in_path: PackedVector2Array):

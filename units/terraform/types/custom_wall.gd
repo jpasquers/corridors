@@ -1,4 +1,4 @@
-extends UnitType
+extends GridUnitType
 class_name CustomWall
 
 func _init():

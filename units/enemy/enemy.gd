@@ -1,6 +1,5 @@
-extends GridUnit
+extends Unit
 
-class_name Terraform
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

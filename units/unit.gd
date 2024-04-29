@@ -3,7 +3,6 @@ extends Node2D
 class_name Unit
 
 var type: UnitType;
-var tile: Vector2i;
 var unit_id: int = GlobalID.next();
 
 # Called when the node enters the scene tree for the first time.

@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cycgadj4q34py"]
+[gd_scene load_steps=5 format=3 uid="uid://cycgadj4q34py"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1_uxa8j"]
 [ext_resource type="PackedScene" uid="uid://yoo4x08ja1yj" path="res://level/map/map.tscn" id="2_i0nm3"]
 [ext_resource type="PackedScene" uid="uid://c7c17u32q6y6x" path="res://level/hud/hud.tscn" id="2_r7kgt"]
 [ext_resource type="Script" path="res://level/hud/hud.gd" id="3_ohx1s"]
-[ext_resource type="PackedScene" uid="uid://cb00ng2dxb42s" path="res://level/wave/wave.tscn" id="4_x1a6n"]
 
 [node name="Level" type="Control"]
 layout_mode = 3
@@ -19,17 +18,7 @@ script = ExtResource("1_uxa8j")
 layer = 2
 
 [node name="HUD" parent="HUDLayer" instance=ExtResource("2_r7kgt")]
-offset_left = 2.08165e-12
-offset_top = -200.0
-offset_right = 0.0
-offset_bottom = 0.0
 script = ExtResource("3_ohx1s")
-
-[node name="Wave" parent="HUDLayer" instance=ExtResource("4_x1a6n")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-grow_horizontal = 0
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = 0

@@ -6,7 +6,7 @@ signal select_unit;
 
 var selected = false;
 var count: int;
-var type: UnitType;
+var type: GridUnitType;
 var ui_position: int = 1;
 
 func _ready():

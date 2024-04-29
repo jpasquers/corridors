@@ -13,10 +13,10 @@ var selectors: Array = [];
 func set_boot_deployable_garrison(in_boot: BootDeployableGarrison):
 	boot = in_boot;
 
-func did_deploy(unit_type: UnitType):
+func did_deploy(unit_type: GridUnitType):
 	type_selector_map[unit_type.id].decr_count();
 
-func update_count_for(unit_type: UnitType, new_count: int):
+func update_count_for(unit_type: GridUnitType, new_count: int):
 	type_selector_map[unit_type.id].set_count(new_count);
 
 # Called when the node enters the scene tree for the first time.
@@ -34,13 +34,13 @@ func _ready():
 		selectors.push_back(scene);
 		add_child(scene);
 
-func _in_placed_unit(type: UnitType):
+func _in_placed_unit(type: GridUnitType):
 	for selector in selectors:
 		if (selector.type.id == type.id):
 			selector.decr_count();
 			selector.deselect();
 
-func _on_selected(type: UnitType):
+func _on_selected(type: GridUnitType):
 	print("Deployable garrison registered unit select");
 	#Deselect other selectors.
 	for selector in selectors:

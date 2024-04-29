@@ -11,19 +11,29 @@ var path_finder: AStarGrid2D;
 var DEFAULT_WIDTH = 20;
 var DEFAULT_HEIGHT = 20;
 var DEFAULT_DENSITY = 0.2;
+var DEFAULT_CHECKPOINT_COUNT = 2;
 var GRASS_TILE_IDX = 3;
 var WALL_TILE_IDX = 2;
 var START_TILE_IDX = 1;
 var FINISH_TILE_IDX = 4;
 var TESTER_TILE_IDX = 5;
+var CHECKPOINT_1_TILE_IDX = 6;
+var CHECKPOINT_2_TILE_IDX = 7;
+var CHECKPOINT_3_TILE_IDX = 8;
+var CHECKPOINT_TILE_IDX_MAP = {
+	1: CHECKPOINT_1_TILE_IDX,
+	2: CHECKPOINT_2_TILE_IDX,
+	3: CHECKPOINT_3_TILE_IDX
+};
 
 #Layers
 var TERRAIN_LAYER = 0;
 var MARKERS_LAYER = 1;
 var OCCUPANT_LAYER = 2;
 
-var mob_tile_path: PackedVector2Array;
-var mob_point_path: PackedVector2Array;
+# This is Array[Array[Vector2i]];
+var mob_tile_paths: Array;
+var mob_point_paths: Array[PackedVector2Array];
 
 #TileSet sources. Static source includes most terrain and markers.
 var STATIC_TILE_SET_SOURCE_ID = 0;
@@ -32,12 +42,16 @@ var STATIC_TILE_SET_SOURCE_ID = 0;
 var wall_positions: Array[Vector2i] = [];
 var all_grass_positions: Array[Vector2i] = [];
 #The viable path region is the largest connected graph of grass tiles.
-var viable_path_region: Array[Vector2i] = [];
+var grass_play_region: Array[Vector2i] = [];
 var start_position: Vector2i;
 var finish_position: Vector2i;
+var checkpoint_positions: Array[Vector2i] = [];
 
-var shadow_type: UnitType;
+var shadow_type: GridUnitType;
 var shadow: Node2D;
+
+@onready var path_indicator_template = preload("res://level/map/path_indicator.tscn");
+var path_indicators: Array = [];
 
 #Maps vector positions to MapTileLayers
 var grid_map: Dictionary = {};
@@ -84,7 +98,7 @@ func hovering_tile(tile: Vector2i):
 	var pos = grid.map_to_local(tile);
 	shadow.position = pos;
 
-func unit_type_viable_for_tile(type: UnitType, tile: Vector2i):
+func unit_type_viable_for_tile(type: GridUnitType, tile: Vector2i):
 	if is_occupied(tile):
 		return false;
 	if (all_grass_positions.has(tile) && !type.can_place_in_ground()):
@@ -104,7 +118,7 @@ func clicked_tile(tile: Vector2i):
 		else:
 			print("Click does not correspond to shadow");
 
-func try_place_unit(type: UnitType, tile: Vector2i) -> bool:
+func try_place_unit(type: GridUnitType, tile: Vector2i) -> bool:
 	print("Attempt place " + str(type.id) + " at " + str(tile));
 	if (type.blocks_pathing() && !valid_path_if_tile_solid(tile)):
 		print("Attempt failed, no valid path after");
@@ -117,7 +131,8 @@ func try_place_unit(type: UnitType, tile: Vector2i) -> bool:
 	unit.position = pos;
 	add_child(unit);
 	grid_map[tile].occupant = unit;
-	re_evaluate_tile_pathing(tile);
+	path_finder.set_point_solid(tile, type.blocks_pathing());
+	synchronize_pathing();
 	placed_unit.emit(type);
 	return true;
 
@@ -131,15 +146,52 @@ func fully_blocked_pathing(tile: Vector2i) -> bool:
 
 func valid_path_if_tile_solid(tile: Vector2i):
 	path_finder.set_point_solid(tile, true);
-	var path = path_finder.get_id_path(start_position, finish_position);
+	var paths = calc_mob_tile_paths();
 	path_finder.set_point_solid(tile, false);
-	return path.size() > 0;
+	return paths.all(func (path):
+		return path.size() > 0;
+	);
+	
+# The global positions the mob will go to,
+# Aka [start, ...checkpoints, finish]
+func get_overall_path() -> Array:
+	var overall_path = [start_position];
+	overall_path.append_array(checkpoint_positions);
+	overall_path.push_back(finish_position);
+	return overall_path;
 
-func re_evaluate_tile_pathing(tile):
-	path_finder.set_point_solid(tile, fully_blocked_pathing(tile));
-	mob_tile_path = path_finder.get_id_path(start_position, finish_position);
-	mob_point_path = path_finder.get_point_path(start_position, finish_position);
-	$PathIndicator.set_point_path(mob_point_path);
+func calc_mob_tile_paths() -> Array:
+	var paths: Array = [];
+	var overall_path = get_overall_path();
+	#-1 since we do the path from x to x+1
+	for i in range(0,overall_path.size()-1):
+		var path = path_finder.get_id_path(overall_path[i], overall_path[i+1]);
+		paths.append(path);
+	return paths;
+	
+func calc_mob_point_paths() -> Array[PackedVector2Array]:
+	var new_paths: Array[PackedVector2Array] = [];
+	var overall_path = get_overall_path();
+	#-1 since we do the path from x to x+1
+	for i in range(0,overall_path.size()-1):
+		new_paths.push_back(
+			path_finder.get_point_path(overall_path[i], overall_path[i+1])
+		);
+	return new_paths;
+
+func synchronize_pathing():
+	mob_tile_paths = calc_mob_tile_paths();
+	mob_point_paths = calc_mob_point_paths();
+	for path_indicator in path_indicators:
+		path_indicator.queue_free();
+	path_indicators = [];
+	for mob_point_path in mob_point_paths:
+		var path_indicator: PathIndicator = path_indicator_template.instantiate();
+		path_indicator.set_point_path(mob_point_path);
+		path_indicators.push_back(
+			path_indicator
+		);
+		add_child(path_indicator);
 
 func init_path_finding():
 	path_finder = AStarGrid2D.new();
@@ -153,29 +205,39 @@ func init_path_finding():
 	path_finder.update();
 	for tile in grid_map.keys():
 		path_finder.set_point_solid(tile, fully_blocked_pathing(tile));
-	mob_tile_path = path_finder.get_id_path(start_position, finish_position);
-	mob_point_path = path_finder.get_point_path(start_position, finish_position);
-	$PathIndicator.set_point_path(mob_point_path);
+	synchronize_pathing();
+
 	
 func generate_maze():
 	populate_empty_grid();
 	gen_base_layer();
-	determine_viable_path_region();
+	determine_grass_play_region();
 	gen_start();
 	gen_finish();
+	gen_checkpoints();
 
 func gen_start():
-	start_position = unoccupied_path_positions().pick_random();
+	start_position = unoccupied_grass_play_positions().pick_random();
 	place_start(start_position);
 	grid_map[start_position].marker_tile_id = START_TILE_IDX;
 
 func gen_finish():
-	finish_position = unoccupied_path_positions().pick_random();
+	finish_position = unoccupied_grass_play_positions().pick_random();
 	place_finish(finish_position);
 	grid_map[finish_position].marker_tile_id = FINISH_TILE_IDX;
 
-func unoccupied_path_positions():
-	return viable_path_region.filter(
+func gen_checkpoints():
+	var ct = checkpoint_count();
+	print("Placing " + str(ct) + " checkpoints");
+	for i in range(1,ct+1):
+		var checkpoint_position = unoccupied_grass_play_positions().pick_random();
+		checkpoint_positions.push_back(checkpoint_position);
+		print("Placing checkpoint " + str(i) + " at " + str(checkpoint_position));
+		place_checkpoint(checkpoint_position, i);
+		grid_map[checkpoint_position].marker_tile_id = CHECKPOINT_TILE_IDX_MAP[i];
+
+func unoccupied_grass_play_positions():
+	return grass_play_region.filter(
 		func has_no_marker(position):
 			return grid_map[position].marker_tile_id == -1;
 	);
@@ -184,7 +246,10 @@ func unoccupied_path_positions():
 func is_occupied(tile: Vector2i):
 	return grid_map[tile].occupant != null;
 
-func determine_viable_path_region():
+# The "grass play" region is the largest region of interconnected grass tiles.
+# Calculated by grouping all grass tiles into disparate "regions".
+# The largest region is then used for all game markers.
+func determine_grass_play_region():
 	# Array[Array[Vector2i]]
 	var regions = [];
 	var grass_copy = all_grass_positions.duplicate();
@@ -194,7 +259,7 @@ func determine_viable_path_region():
 		regions.push_back(region);
 		grass_copy = remove_all(grass_copy,region);
 
-	viable_path_region = regions.reduce(func bigger(curr, prev):
+	grass_play_region = regions.reduce(func bigger(curr, prev):
 		return curr if curr.size() > prev.size() else prev;
 	, []);
 		
@@ -255,6 +320,9 @@ func grid_width():
 func grid_height():
 	return map_config.grid_size.y if map_config else DEFAULT_HEIGHT;
 
+func checkpoint_count():
+	return map_config.checkpoint_count if map_config else DEFAULT_CHECKPOINT_COUNT;
+
 func place_grass(pos: Vector2i):
 	var grid: TileMap = $MapGrid;
 	grid.set_cell(TERRAIN_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), GRASS_TILE_IDX); 
@@ -275,7 +343,12 @@ func place_finish(pos: Vector2i):
 	var grid: TileMap = $MapGrid;
 	grid.set_cell(MARKERS_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), FINISH_TILE_IDX);
 
-func set_shadow(type: UnitType):
+func place_checkpoint(pos: Vector2i, idx: int):
+	var grid: TileMap = $MapGrid;
+	var tile_idx = CHECKPOINT_TILE_IDX_MAP[idx];
+	grid.set_cell(MARKERS_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), tile_idx);
+		
+func set_shadow(type: GridUnitType):
 	print("Map registered shadow");
 	shadow_type = type;
 	var tile = mouse_pos_tile();

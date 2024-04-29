@@ -7,6 +7,15 @@ var counts_map: Dictionary;
 static func EMPTY():
 	var boot = BootDeployableGarrison.new();
 	boot.counts_map = {
+		"custom_wall": 0,
+		"barricade": 0,
+		"swordsman": 0,
+	}
+	return boot;
+
+static func TEST():
+	var boot = BootDeployableGarrison.new();
+	boot.counts_map = {
 		"custom_wall": 5,
 		"barricade": 1,
 		"swordsman": 1,

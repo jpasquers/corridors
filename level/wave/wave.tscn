@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://cb00ng2dxb42s"]
-
-[node name="Wave" type="Control"]
-layout_mode = 3
-anchors_preset = 0

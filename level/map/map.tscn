@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://yoo4x08ja1yj"]
+[gd_scene load_steps=12 format=3 uid="uid://yoo4x08ja1yj"]
 
 [ext_resource type="Script" path="res://level/map/map.gd" id="1_m1vox"]
 [ext_resource type="PackedScene" uid="uid://cdb8htte4g6ok" path="res://level/map/tiles/markers/start.tscn" id="2_pc1cu"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://d2y4s5l1bbv6o" path="res://level/map/tiles/terrain/grass_tile.tscn" id="4_qwpam"]
 [ext_resource type="PackedScene" uid="uid://pbaxhlgikgvy" path="res://level/map/tiles/markers/finish.tscn" id="5_dahs1"]
 [ext_resource type="PackedScene" uid="uid://dkbp4vc0agahp" path="res://level/map/tiles/terrain/tester.tscn" id="6_xv2dh"]
-[ext_resource type="PackedScene" uid="uid://dsog7hemfwecs" path="res://level/map/path_indicator.tscn" id="7_lr17p"]
-[ext_resource type="Script" path="res://level/map/path_indicator.gd" id="8_r36k8"]
+[ext_resource type="PackedScene" uid="uid://6hqo02kkcvp" path="res://level/map/tiles/markers/checkpoint_1.tscn" id="9_mfvm1"]
+[ext_resource type="PackedScene" uid="uid://bnw5aq0cho4j1" path="res://level/map/tiles/markers/checkpoint_2.tscn" id="10_1vcvy"]
+[ext_resource type="PackedScene" uid="uid://bk1k2a746mltm" path="res://level/map/tiles/markers/checkpoint_3.tscn" id="11_p01cy"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_rje4m"]
 resource_name = "static"
@@ -16,6 +17,9 @@ scenes/2/scene = ExtResource("3_eiugi")
 scenes/3/scene = ExtResource("4_qwpam")
 scenes/4/scene = ExtResource("5_dahs1")
 scenes/5/scene = ExtResource("6_xv2dh")
+scenes/6/scene = ExtResource("9_mfvm1")
+scenes/7/scene = ExtResource("10_1vcvy")
+scenes/8/scene = ExtResource("11_p01cy")
 
 [sub_resource type="TileSet" id="TileSet_bxrvi"]
 tile_size = Vector2i(64, 64)
@@ -31,10 +35,6 @@ offset_right = 640.0
 offset_bottom = 1280.0
 grow_horizontal = 2
 script = ExtResource("1_m1vox")
-
-[node name="PathIndicator" parent="." instance=ExtResource("7_lr17p")]
-position = Vector2(2.08165e-12, 2.08165e-12)
-script = ExtResource("8_r36k8")
 
 [node name="MapGrid" type="TileMap" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)
