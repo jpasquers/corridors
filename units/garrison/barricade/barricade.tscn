@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://units/garrison/barricade/barricade.gd" id="1_1rrei"]
 [ext_resource type="PackedScene" uid="uid://b6ab82f75axo7" path="res://units/components/health_component.tscn" id="2_ivcus"]
-[ext_resource type="PackedScene" uid="uid://b6leds2fi021r" path="res://units/components/hitbox_component.tscn" id="3_lvm0s"]
+[ext_resource type="PackedScene" uid="uid://b6leds2fi021r" path="res://units/enemy/enemy_hitbox_component.tscn" id="3_lvm0s"]
 [ext_resource type="Texture2D" uid="uid://ue88dcom0ao8" path="res://assets/barricade.png" id="4_4guc8"]
 
 [node name="Barricade" type="Node2D"]

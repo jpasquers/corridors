@@ -57,6 +57,9 @@ func clicked_tile(tile: Vector2i):
 		pass;
 	else:
 		if (shadow_type):
+			if (!unit_type_viable_for_tile(shadow_type, tile)):
+				print("Unit not viable for tile");
+				return;
 			if (try_place_unit(shadow_type, tile)):
 				shadow_type = null;
 				shadow = null;

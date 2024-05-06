@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://units/garrison/swordsman/swordsman.gd" id="1_ut8sj"]
 [ext_resource type="PackedScene" uid="uid://b6ab82f75axo7" path="res://units/components/health_component.tscn" id="1_vtd76"]
-[ext_resource type="PackedScene" uid="uid://b6leds2fi021r" path="res://units/components/hitbox_component.tscn" id="2_o2jdd"]
+[ext_resource type="PackedScene" uid="uid://b6leds2fi021r" path="res://units/enemy/enemy_hitbox_component.tscn" id="2_o2jdd"]
 [ext_resource type="Texture2D" uid="uid://c8fq5fxx8mc4y" path="res://assets/swordsman.png" id="4_8dng4"]
 
 [node name="Swordsman" type="Node2D"]
