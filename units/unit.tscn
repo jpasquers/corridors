@@ -4,5 +4,3 @@
 
 [node name="Unit" type="Node2D"]
 script = ExtResource("1_34h6g")
-
-[node name="UnitImage" type="Sprite2D" parent="."]

@@ -1,15 +1,9 @@
-extends Node2D
+extends Enemy
 
-class_name PathIndicator;
-
-var point_path: PackedVector2Array;
-
-func set_point_path(in_path: PackedVector2Array):
-	point_path = in_path;
-	$Path.set_points(point_path);
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	type = EnemyPlaceholderType.new();
 	pass # Replace with function body.
 
 

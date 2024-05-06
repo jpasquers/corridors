@@ -17,6 +17,7 @@ static func TEST():
 	var boot = BootDeployableGarrison.new();
 	boot.counts_map = {
 		"custom_wall": 5,
+		"archer": 2,
 		"barricade": 1,
 		"swordsman": 1,
 	}

@@ -1,0 +1,40 @@
+[gd_scene load_steps=12 format=3 uid="uid://bkvevc6hedv0k"]
+
+[ext_resource type="PackedScene" uid="uid://cdb8htte4g6ok" path="res://level/world/map/tiles/markers/start.tscn" id="1_6time"]
+[ext_resource type="PackedScene" uid="uid://c46n1aw6mnyt1" path="res://level/world/map/tiles/terrain/hill.tscn" id="2_7fopt"]
+[ext_resource type="PackedScene" uid="uid://d2y4s5l1bbv6o" path="res://level/world/map/tiles/terrain/grass_tile.tscn" id="3_i8pjb"]
+[ext_resource type="PackedScene" uid="uid://pbaxhlgikgvy" path="res://level/world/map/tiles/markers/finish.tscn" id="4_4au3f"]
+[ext_resource type="PackedScene" uid="uid://dkbp4vc0agahp" path="res://level/world/map/tiles/terrain/tester.tscn" id="5_mutom"]
+[ext_resource type="PackedScene" uid="uid://6hqo02kkcvp" path="res://level/world/map/tiles/markers/checkpoint_1.tscn" id="6_bpabp"]
+[ext_resource type="PackedScene" uid="uid://bnw5aq0cho4j1" path="res://level/world/map/tiles/markers/checkpoint_2.tscn" id="7_bcmhj"]
+[ext_resource type="PackedScene" uid="uid://bk1k2a746mltm" path="res://level/world/map/tiles/markers/checkpoint_3.tscn" id="8_hkoxu"]
+[ext_resource type="Script" path="res://level/world/map/map.gd" id="9_trocp"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_rje4m"]
+resource_name = "static"
+scenes/1/scene = ExtResource("1_6time")
+scenes/2/scene = ExtResource("2_7fopt")
+scenes/3/scene = ExtResource("3_i8pjb")
+scenes/4/scene = ExtResource("4_4au3f")
+scenes/5/scene = ExtResource("5_mutom")
+scenes/6/scene = ExtResource("6_bpabp")
+scenes/7/scene = ExtResource("7_bcmhj")
+scenes/8/scene = ExtResource("8_hkoxu")
+
+[sub_resource type="TileSet" id="TileSet_bxrvi"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetScenesCollectionSource_rje4m")
+
+[node name="Map" type="TileMap"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+tile_set = SubResource("TileSet_bxrvi")
+rendering_quadrant_size = 20
+format = 2
+layer_0/name = "Terrain"
+layer_1/name = "Markers"
+layer_1/y_sort_origin = 5
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/z_index = 2
+layer_2/tile_data = PackedInt32Array()
+script = ExtResource("9_trocp")

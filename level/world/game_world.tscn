@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://yoo4x08ja1yj"]
+
+[ext_resource type="Script" path="res://level/world/game_world.gd" id="1_m1vox"]
+[ext_resource type="PackedScene" uid="uid://bkvevc6hedv0k" path="res://level/world/map/map.tscn" id="2_5ti27"]
+[ext_resource type="PackedScene" uid="uid://cccuq2ekbfeff" path="res://level/world/pathing/pathing.tscn" id="5_ytc1o"]
+[ext_resource type="PackedScene" uid="uid://bs7nfapqoph2c" path="res://level/world/draggable_camera.tscn" id="11_y665d"]
+
+[node name="GameWorld" type="Node2D"]
+script = ExtResource("1_m1vox")
+
+[node name="Map" parent="." instance=ExtResource("2_5ti27")]
+
+[node name="DraggableCamera" parent="." instance=ExtResource("11_y665d")]
+
+[node name="Pathing" parent="." instance=ExtResource("5_ytc1o")]

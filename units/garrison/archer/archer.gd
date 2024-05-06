@@ -1,13 +1,13 @@
-extends Node2D
+extends Garrison
 
-class_name Unit
+class_name Archer
 
-var type: UnitType;
-var unit_id: int = GlobalID.next();
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass;
+	type = ArcherType.new();
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

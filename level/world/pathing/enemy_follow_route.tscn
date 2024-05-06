@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cerbt3xfp21hn"]
+
+[ext_resource type="Script" path="res://level/world/pathing/enemy_follow_route.gd" id="1_w1tdd"]
+
+[node name="EnemyFollowRoute" type="PathFollow2D"]
+script = ExtResource("1_w1tdd")

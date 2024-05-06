@@ -11,7 +11,7 @@ var ui_position: int = 1;
 
 func _ready():
 	sync_count();
-	var image: Image = Image.load_from_file(type.asset_path);
+	var image: Image = Image.load_from_file(type.simple_view_path);
 	var texture: ImageTexture = ImageTexture.create_from_image(image);
 	$Selectable/UnitImage.set_texture(texture);
 	$Selectable.pressed.connect(_on_selected);

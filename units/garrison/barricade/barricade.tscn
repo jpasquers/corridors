@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://037jtedmlml"]
+
+[ext_resource type="Script" path="res://units/garrison/barricade/barricade.gd" id="1_1rrei"]
+[ext_resource type="PackedScene" uid="uid://b6ab82f75axo7" path="res://units/components/health_component.tscn" id="2_ivcus"]
+[ext_resource type="PackedScene" uid="uid://b6leds2fi021r" path="res://units/components/hitbox_component.tscn" id="3_lvm0s"]
+[ext_resource type="Texture2D" uid="uid://ue88dcom0ao8" path="res://assets/barricade.png" id="4_4guc8"]
+
+[node name="Barricade" type="Node2D"]
+script = ExtResource("1_1rrei")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_ivcus")]
+position = Vector2(0, -16)
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_lvm0s")]
+
+[node name="UnitAsset" type="Sprite2D" parent="."]
+texture = ExtResource("4_4guc8")

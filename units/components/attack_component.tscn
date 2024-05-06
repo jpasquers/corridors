@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgjvunaltvnlp"]
+
+[ext_resource type="Script" path="res://units/components/attack_component.gd" id="1_jd5tg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_627dh"]
+
+[node name="AttackComponent" type="Node2D"]
+script = ExtResource("1_jd5tg")
+
+[node name="RangeArea" type="Area2D" parent="."]
+
+[node name="Range" type="CollisionShape2D" parent="RangeArea"]
+shape = SubResource("CircleShape2D_627dh")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
