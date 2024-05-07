@@ -14,6 +14,12 @@ func _process(delta):
 	pass
 
 func _input(event):
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				zoom = zoom + Vector2(0.1,0.1);
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				zoom = zoom - Vector2(0.1,0.1);
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		dragging = event.is_pressed();
 	if dragging and DisplayServer.mouse_get_mode() == DisplayServer.MOUSE_MODE_VISIBLE:
