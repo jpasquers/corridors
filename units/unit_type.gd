@@ -9,6 +9,7 @@ static var MAP = {
 	"barricade": BarricadeType.new(),
 	"custom_wall": CustomWallType.new(),
 	"archer": ArcherType.new(),
+	"burner": BurnerType.new(),
 	"enemy_placeholder": EnemyPlaceholderType.new()
 }
 

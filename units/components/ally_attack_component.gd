@@ -4,6 +4,8 @@ class_name AttackComponent;
 
 signal do_attack;
 
+@export var attack_when_no_target = false;
+
 var range: int;
 var attack_delay: float; 
 var waiting_for_enemy: bool = false;
@@ -30,27 +32,25 @@ func _process(delta):
 	pass
 
 func _on_attack_timer():
-	if target_queue.size() > 0:
-		go(target_queue[0])
+	var should_attack = attack_when_no_target || target_queue.size() > 0;
+	if should_attack:
+		go();
 	else:
 		waiting_for_enemy = true;
 	
 func _on_enemy_enter(enemy_area):
 	var enemy = enemy_area.owner;
-	print("detected enemy:" + str(enemy.unit_id));
 	target_queue.push_back(enemy);
 	if waiting_for_enemy:
 		waiting_for_enemy = false;
-		go(enemy);
+		go();
 	
 func _on_enemy_exit(enemy_area):
 	var enemy = enemy_area.owner;
-	print("enemy left:" + str(enemy.unit_id));
 	target_queue = target_queue.filter(func x(target):
 		return 	target.unit_id != enemy.unit_id
 	);
-	
-func go(enemy: Enemy):
-	print("would attack:" + str(enemy.unit_id));
-	do_attack.emit(enemy);
+
+func go():
+	do_attack.emit(target_queue);
 	$AttackTimer.start();

@@ -10,10 +10,10 @@ script = ExtResource("1_alpcx")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_k52jp")]
 
-[node name="AttackComponent" parent="." instance=ExtResource("2_rbbm7")]
-
 [node name="UnitAsset" type="Sprite2D" parent="."]
 texture = ExtResource("4_twu0k")
 
 [node name="ArrowStart" type="Marker2D" parent="."]
 position = Vector2(8, 0)
+
+[node name="AttackComponent" parent="." instance=ExtResource("2_rbbm7")]

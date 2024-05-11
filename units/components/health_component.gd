@@ -19,9 +19,15 @@ func _ready():
 func _process(delta):
 	pass
 
+
 # Does not consider any armor/dodge/anything. strictly health loss
 func lose_health(damage):
-	print("enemy has " + str(health) + " and will take " + str(damage) + " damage")
+	var dmg_indicator = preload("res://units/components/damage_amt_indicator.tscn").instantiate();
+	dmg_indicator.position = $DamageAmtPt.position;
+	dmg_indicator.position.x += randi_range(-40,40);
+	dmg_indicator.position.y += randi_range(-10,0);
+	add_child(dmg_indicator);
+	dmg_indicator.display(damage);
 	set_health(health-damage);
 
 func set_health(in_health):

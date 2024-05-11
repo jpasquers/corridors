@@ -4,5 +4,8 @@ class_name Enemy
 
 signal died;
 
-func get_static_aim_at():
+func get_forward_position():
+	printerr("MUST IMPLEMENT PER ENEMY");
+
+func inbound_damage(damage: int):
 	printerr("MUST IMPLEMENT PER ENEMY");

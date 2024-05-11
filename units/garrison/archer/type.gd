@@ -6,7 +6,7 @@ func _init():
 	id = "archer";
 	base_dmg = 3;
 	base_range = 200;
-	base_attack_speed = 2;
+	base_attack_speed = 0.3;
 
 func can_place_in_ground():
 	return false;

@@ -18,7 +18,7 @@ static func TEST():
 	boot.counts_map = {
 		"custom_wall": 5,
 		"archer": 2,
-		"barricade": 1,
+		"burner": 1,
 		"swordsman": 1,
 	}
 	return boot;
