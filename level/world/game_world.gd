@@ -71,7 +71,6 @@ func try_place_unit(type: GridUnitType, tile: Vector2i) -> bool:
 	if (type.blocks_pathing() && !pathing.valid_path_if_tile_solid(tile)):
 		print("Attempt failed, no valid path after");
 		return false;
-	print(type.instance_template());
 	var unit = type.instance_template().instantiate();
 	unit.type = type;
 	unit.tile = tile;

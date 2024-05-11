@@ -11,9 +11,12 @@ height = 23.15
 script = ExtResource("1_ljgc0")
 
 [node name="StaticAsset" type="Sprite2D" parent="."]
+z_index = 5
 texture = ExtResource("2_rmi6a")
 
 [node name="Area" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
 position = Vector2(-2, -0.5)

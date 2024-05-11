@@ -21,3 +21,6 @@ texture = ExtResource("4_tgdfj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitboxComponent"]
 shape = SubResource("CircleShape2D_3472l")
+
+[node name="StaticAimMarker" type="Marker2D" parent="."]
+position = Vector2(18, -1)

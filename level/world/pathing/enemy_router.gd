@@ -40,7 +40,8 @@ func _on_reached_end(follower: EnemyFollowRoute):
 	followers = followers.filter(func do(a_follower):
 		return a_follower != follower;
 	)
-	follower.get_recipient().queue_free();
+	if (is_instance_valid(follower.get_recipient())):
+		follower.get_recipient().queue_free();
 	follower.queue_free();
 	enemy_escaped.emit(follower.get_recipient);
 
