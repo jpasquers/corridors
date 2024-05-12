@@ -4,9 +4,9 @@ class_name BurnerType
 func _init():
 	simple_view_path = "res://assets/burner.png";
 	id = "burner";
-	base_dmg = 1;
-	base_range = 400;
-	base_attack_speed = 0.5;
+	starting_base_dmg = 1;
+	starting_base_range = 400;
+	starting_base_attack_rate = 0.5;
 
 func can_place_in_ground():
 	return false;

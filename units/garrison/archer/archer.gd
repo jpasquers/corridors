@@ -9,8 +9,8 @@ class_name Archer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	type = ArcherType.new();
-	attacker.set_attack_delay(type.base_attack_speed);
-	attacker.set_range(type.base_range);
+	attacker.set_attack_delay(type.starting_base_attack_speed);
+	attacker.set_range(type.starting_base_range);
 	attacker.do_attack.connect(_on_do_attack);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

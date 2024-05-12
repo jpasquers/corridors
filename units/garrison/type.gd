@@ -2,6 +2,6 @@ extends GridUnitType
 
 class_name GarrisonType
 
-var base_dmg;
-var base_attack_speed;
-var base_range;
+var starting_base_dmg: float;
+var starting_base_attack_rate: float;
+var starting_base_range: float;

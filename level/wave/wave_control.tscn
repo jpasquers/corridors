@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cb00ng2dxb42s"]
+[gd_scene load_steps=3 format=3 uid="uid://cb00ng2dxb42s"]
 
 [ext_resource type="Script" path="res://level/wave/wave_control.gd" id="1_yutsr"]
+[ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/common_hud_bg.tscn" id="2_yld0g"]
 
 [node name="WaveControl" type="Control"]
 layout_mode = 3
@@ -26,15 +27,12 @@ bbcode_enabled = true
 text = "[center]Time until next wave:[/center]"
 scroll_active = false
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="CommonHudBg" parent="." instance=ExtResource("2_yld0g")]
 z_index = -1
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0980392, 0, 0.0352941, 1)
+offset_top = -1.0
+offset_right = 0.000244141
+offset_bottom = -1.0
 
 [node name="Time" type="RichTextLabel" parent="."]
 layout_mode = 1

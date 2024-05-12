@@ -10,6 +10,7 @@ static var MAP = {
 	"custom_wall": CustomWallType.new(),
 	"archer": ArcherType.new(),
 	"burner": BurnerType.new(),
+	"syfon": SyfonType.new(),
 	"enemy_placeholder": EnemyPlaceholderType.new()
 }
 

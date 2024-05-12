@@ -19,6 +19,7 @@ static func TEST():
 		"custom_wall": 5,
 		"archer": 2,
 		"burner": 1,
+		"syfon": 1,
 		"swordsman": 1,
 	}
 	return boot;

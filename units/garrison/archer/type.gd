@@ -4,9 +4,9 @@ class_name ArcherType
 func _init():
 	simple_view_path = "res://assets/archer.png";
 	id = "archer";
-	base_dmg = 3;
-	base_range = 200;
-	base_attack_speed = 0.3;
+	starting_base_dmg = 3;
+	starting_base_range = 200;
+	starting_base_attack_rate = 0.3;
 
 func can_place_in_ground():
 	return false;
