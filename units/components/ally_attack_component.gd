@@ -3,6 +3,7 @@ extends Node2D
 class_name AttackComponent;
 
 signal do_attack;
+signal updated_target_queue;
 
 @export var attack_when_no_target = false;
 
@@ -10,7 +11,7 @@ var range: int;
 var attack_delay: float; 
 var waiting_for_enemy: bool = false;
 
-var target_queue: Array;
+var target_queue: Array[Enemy];
 
 func set_range(in_range):
 	range = in_range;
@@ -41,6 +42,7 @@ func _on_attack_timer():
 func _on_enemy_enter(enemy_area):
 	var enemy = enemy_area.owner;
 	target_queue.push_back(enemy);
+	updated_target_queue.emit(target_queue);
 	if waiting_for_enemy:
 		waiting_for_enemy = false;
 		go();
@@ -50,7 +52,8 @@ func _on_enemy_exit(enemy_area):
 	target_queue = target_queue.filter(func x(target):
 		return 	target.unit_id != enemy.unit_id
 	);
+	updated_target_queue.emit(target_queue);
 
 func go():
-	do_attack.emit(target_queue);
+	do_attack.emit();
 	$AttackTimer.start();

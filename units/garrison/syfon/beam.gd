@@ -1,9 +1,7 @@
-extends GridUnit
+extends Line2D
 
-class_name Garrison
+class_name Beam
 
-var stats: AttackerStats;
-var active_targets: Array[Enemy];
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

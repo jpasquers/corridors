@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhh82wv3rvdiu"]
+
+[ext_resource type="Script" path="res://units/garrison/syfon/beam.gd" id="1_ugkcc"]
+
+[node name="Beam" type="Line2D"]
+points = PackedVector2Array(13, -11)
+default_color = Color(0.141176, 0.6, 0.364706, 1)
+script = ExtResource("1_ugkcc")

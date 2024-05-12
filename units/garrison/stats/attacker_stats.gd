@@ -19,7 +19,7 @@ func _init(type: GarrisonType):
 	incr_dmg = 1;
 	incr_range = 1;
 
-func get_curr_dmg():
+func get_curr_dmg(enemy: Enemy):
 	return base_dmg * incr_dmg;
 
 func get_curr_attack_rate():
