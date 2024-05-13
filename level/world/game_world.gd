@@ -61,6 +61,7 @@ func clicked_tile(tile: Vector2i):
 				print("Unit not viable for tile");
 				return;
 			if (try_place_unit(shadow_type, tile)):
+				shadow.queue_free();
 				shadow_type = null;
 				shadow = null;
 		else:

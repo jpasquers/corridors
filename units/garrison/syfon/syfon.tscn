@@ -13,7 +13,7 @@ script = ExtResource("1_emli5")
 [node name="UnitAsset" type="Sprite2D" parent="."]
 texture = ExtResource("4_4sibn")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="BeamStart" type="Marker2D" parent="."]
 position = Vector2(12, -11)
 
 [node name="AttackComponent" parent="." instance=ExtResource("3_7fvdh")]

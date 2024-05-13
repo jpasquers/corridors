@@ -13,9 +13,9 @@ func _init(type: SyfonType):
 
 func ramp_adjust_targets(enemies: Array[Enemy]):
 	for id in ramps.keys():
-		if !enemies.any(func(enemy):
-			enemy.unit_id = id	
-		):
+		if !(enemies.any(func(enemy):
+			return enemy.unit_id == id
+		)):
 			#Enemy is gone, reset ramp to 0
 			ramps[id] = 0;
 

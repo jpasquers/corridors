@@ -14,7 +14,7 @@ func _process(delta):
 func inbound_damage(damage: int):
 	$HealthComponent.lose_health(damage);
 
-func get_forward_position():
+func get_forward_global_position():
 	return $ForwardMarker.global_position;
 
 func _on_no_health():

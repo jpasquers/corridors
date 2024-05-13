@@ -2,7 +2,7 @@ extends Garrison
 
 @onready var attacker: AttackComponent = $AttackComponent;
 
-var active_beam: Beam;
+var active_beams: Array[Beam];
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +18,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if active_targets.size() > 0:
+		look_at(active_targets[0].global_position);
 	
 func select_targets(target_queue: Array[Enemy]) -> Array[Enemy]:
 	if target_queue.size() > 0:
@@ -34,8 +35,20 @@ func _on_do_attack():
 
 func _on_updated_target_queue(target_queue: Array[Enemy]):
 	var selected = select_targets(target_queue);
-	stats.ramp_adjust_targets(selected);
 	active_targets = selected;
-	print("new target set of size " + str(active_targets.size()));
-	if active_targets.size() > 0:
-		look_at(active_targets[0].global_position);
+	draw_beams_for_active_targets();
+	stats.ramp_adjust_targets(active_targets);
+
+func draw_beams_for_active_targets():
+	for existing in active_beams:
+		existing.queue_free();
+	active_beams = [];
+	
+	var template = preload("res://units/garrison/syfon/beam.tscn");
+	for target in active_targets:
+		var beam = template.instantiate();
+		beam.z_index = 5;
+		beam.define($BeamStart, target);
+		active_beams.push_back(beam);
+		add_sibling(beam);
+	
