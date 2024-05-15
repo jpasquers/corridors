@@ -17,7 +17,7 @@ func _ready():
 	$Selectable.pressed.connect(_on_selected);
 
 func _process(delta):
-	if Input.is_action_pressed("ui_" + str(ui_position)):
+	if Input.is_action_just_released("ui_" + str(ui_position)):
 		_on_selected();
 	
 func decr_count():

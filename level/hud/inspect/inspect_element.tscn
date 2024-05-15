@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://t3ygdg1xfp65"]
+
+[ext_resource type="Script" path="res://level/hud/inspect/inspect_element.gd" id="1_0j5pm"]
+[ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/hud/common_hud_bg.tscn" id="2_bem7h"]
+
+[node name="InspectElement" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0j5pm")
+
+[node name="CommonHudBg" parent="." instance=ExtResource("2_bem7h")]
+layout_mode = 1

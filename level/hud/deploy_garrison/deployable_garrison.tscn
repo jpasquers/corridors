@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dpkqoy03aace4"]
 
-[ext_resource type="Script" path="res://level/hud/deployable_garrison.gd" id="1_rjmiu"]
+[ext_resource type="Script" path="res://level/hud/deploy_garrison/deployable_garrison.gd" id="1_rjmiu"]
 
 [node name="DeployableGarrison" type="HBoxContainer"]
 anchors_preset = 7

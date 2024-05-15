@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cb00ng2dxb42s"]
 
-[ext_resource type="Script" path="res://level/wave/wave_control.gd" id="1_yutsr"]
-[ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/common_hud_bg.tscn" id="2_yld0g"]
+[ext_resource type="Script" path="res://level/hud/wave_control.gd" id="1_yutsr"]
+[ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/hud/common_hud_bg.tscn" id="2_yld0g"]
 
 [node name="WaveControl" type="Control"]
 layout_mode = 3

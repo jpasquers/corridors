@@ -2,6 +2,7 @@ extends Node
 class_name GameWorld;
 
 signal placed_unit;
+signal do_inspect;
 
 var map_config: MapConfig;
 
@@ -54,7 +55,7 @@ func unit_type_viable_for_tile(type: GridUnitType, tile: Vector2i):
 
 func clicked_tile(tile: Vector2i):
 	if is_occupied(tile):
-		pass;
+		do_inspect.emit(tile_occupant_map[tile]);
 	else:
 		if (shadow_type):
 			if (!unit_type_viable_for_tile(shadow_type, tile)):

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dlmvnrgh0nsoi"]
 
-[ext_resource type="Script" path="res://level/hud/deployable_unit_selector.gd" id="1_hjcdy"]
+[ext_resource type="Script" path="res://level/hud/deploy_garrison/deployable_unit_selector.gd" id="1_hjcdy"]
 
 [node name="Deployable Unit Selector" type="Control"]
 custom_minimum_size = Vector2(64, 64)

@@ -14,8 +14,12 @@ func set_level_start_config(in_level_config: LevelStartConfig):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$GameWorld.placed_unit.connect(_on_placed_unit);
+	$GameWorld.do_inspect.connect(_on_do_inspect);
 	$HUDLayer/HUD/DeployableGarrison.selected_shadow.connect(_on_selected_shadow);
 	$HUDLayer/HUD/WaveControl.spawn_enemy.connect(_on_should_spawn_enemy);
+
+func _on_do_inspect(unit: Unit):
+	$HUDLayer/HUD/InspectElement._in_inspect(unit);
 
 func _on_placed_unit(type: GridUnitType):
 	print("Unit placed");

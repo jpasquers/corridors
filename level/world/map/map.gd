@@ -58,18 +58,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
-
-func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT || event is InputEventMouseMotion:
+	if Input.is_action_just_released("lmb"):
 		var tile = get_mouse_pos_tile();
 		if (is_valid_tile(tile)):
-			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-				print("click registered at tile " + str(tile));
-				clicked_tile.emit(tile);
-			else:
-				hovering_tile.emit(tile);
+			clicked_tile.emit(tile);
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		var tile = get_mouse_pos_tile();
+		if (is_valid_tile(tile)):
+			hovering_tile.emit(tile);
 
 # The global tile positions the mob will go to,
 # Aka [start, ...checkpoints, finish]
