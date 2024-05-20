@@ -13,8 +13,9 @@ func _ready():
 	sync_count();
 	var image: Image = Image.load_from_file(type.simple_view_path);
 	var texture: ImageTexture = ImageTexture.create_from_image(image);
-	$Selectable/UnitImage.set_texture(texture);
-	$Selectable.pressed.connect(_on_selected);
+	$Inner/Selectable.icon_alignment = 1;
+	$Inner/Selectable.icon = texture;
+	$Inner/Selectable.pressed.connect(_on_selected);
 
 func _process(delta):
 	if Input.is_action_just_released("ui_" + str(ui_position)):
@@ -36,4 +37,4 @@ func _on_selected():
 		selected = true;
 
 func sync_count(): 
-	$Count.text = String.num_int64(count);
+	$Inner/Count.text = String.num_int64(count);

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvf0qqndwmv02"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_2k02p"]
-[ext_resource type="PackedScene" uid="uid://cylcsaa6gjwnm" path="res://menu.tscn" id="2_uuxvp"]
+[ext_resource type="PackedScene" uid="uid://cylcsaa6gjwnm" path="res://menu/menu.tscn" id="2_uuxvp"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -12,4 +12,5 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2k02p")
 
-[node name="MenuLayer" parent="." instance=ExtResource("2_uuxvp")]
+[node name="Menu" parent="." instance=ExtResource("2_uuxvp")]
+layout_mode = 1

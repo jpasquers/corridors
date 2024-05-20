@@ -95,7 +95,6 @@ func boot_pathing_cfg():
 	var initial_solid_map = {};
 	for tile in map.all_tile_positions():
 		initial_solid_map[tile] = fully_blocked_pathing(tile);
-	print(map.get_tile_destinations());
 	return BootPathingConfig.new(
 		Vector2i(map.grid_tile_width(), map.grid_tile_height()),
 		map.tile_set.tile_size,

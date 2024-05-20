@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends VBoxContainer
 
 class_name DeployableGarrison;
 
@@ -23,7 +23,7 @@ func update_count_for(unit_type: GridUnitType, new_count: int):
 func _ready():
 	var scene_template = load("res://level/hud//deploy_garrison/deployable_unit_selector.tscn");
 	var ui_position = 0;
-	for key in boot.counts_map.keys():
+	for key in boot.counts_map.keys(): 
 		ui_position+= 1;
 		var scene = scene_template.instantiate();
 		scene.count = boot.counts_map[key];

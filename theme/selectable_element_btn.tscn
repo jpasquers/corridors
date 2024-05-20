@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq3go5528sgvk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxutv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egr38"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 0.239216)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbu3v"]
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 0.815686)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1vms"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l48d4"]
+bg_color = Color(0.0666667, 0.0666667, 0.0666667, 0.705882)
+
+[node name="SelectableElementBtn" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_nxutv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_egr38")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bbu3v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_v1vms")
+theme_override_styles/focus = SubResource("StyleBoxFlat_l48d4")

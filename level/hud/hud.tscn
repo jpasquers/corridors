@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7c17u32q6y6x"]
 
 [ext_resource type="PackedScene" uid="uid://cb00ng2dxb42s" path="res://level/hud/wave_control.tscn" id="1_oph2f"]
-[ext_resource type="PackedScene" uid="uid://dpkqoy03aace4" path="res://level/hud/deploy_garrison/deployable_garrison.tscn" id="1_w158h"]
+[ext_resource type="PackedScene" uid="uid://dpkqoy03aace4" path="res://level/hud/deploy_garrison/deployable.tscn" id="1_w158h"]
 [ext_resource type="PackedScene" uid="uid://t3ygdg1xfp65" path="res://level/hud/inspect/inspect_element.tscn" id="3_v36hv"]
 
 [node name="HUD" type="Control"]
@@ -12,22 +12,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DeployableGarrison" parent="." instance=ExtResource("1_w158h")]
+[node name="Deployable" parent="." instance=ExtResource("1_w158h")]
 layout_mode = 1
-offset_left = -46.5
-offset_top = -93.0
-offset_right = 46.5
-offset_bottom = -40.0
 
 [node name="WaveControl" parent="." instance=ExtResource("1_oph2f")]
+light_mask = 2
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_bottom = 0.0
-offset_left = -400.0
-offset_top = 15.0
-offset_right = -24.0
-offset_bottom = 400.0
+offset_left = -380.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 389.0
 grow_horizontal = 0
 grow_vertical = 1
 
@@ -38,9 +35,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -492.0
-offset_top = -370.0
-offset_right = -22.0
-offset_bottom = -41.0
+offset_left = -475.0
+offset_top = -330.0
+offset_right = -5.0
+offset_bottom = -1.0
 grow_horizontal = 0
 grow_vertical = 0

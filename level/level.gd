@@ -7,7 +7,7 @@ var shadow: GridUnitType;
 
 func set_level_start_config(in_level_config: LevelStartConfig):
 	$GameWorld/Map.set_map_config(in_level_config.map_config);
-	$HUDLayer/HUD/DeployableGarrison.set_boot_deployable_garrison(in_level_config.boot_deployable_garrison);
+	$HUDLayer/HUD/Deployable/DeployableGarrison.set_boot_deployable_garrison(in_level_config.boot_deployable_garrison);
 	$HUDLayer/HUD/WaveControl.set_waves_config(in_level_config.waves_config);
 	level_start_config = in_level_config;
 
@@ -15,7 +15,7 @@ func set_level_start_config(in_level_config: LevelStartConfig):
 func _ready():
 	$GameWorld.placed_unit.connect(_on_placed_unit);
 	$GameWorld.do_inspect.connect(_on_do_inspect);
-	$HUDLayer/HUD/DeployableGarrison.selected_shadow.connect(_on_selected_shadow);
+	$HUDLayer/HUD/Deployable/DeployableGarrison.selected_shadow.connect(_on_selected_shadow);
 	$HUDLayer/HUD/WaveControl.spawn_enemy.connect(_on_should_spawn_enemy);
 
 func _on_do_inspect(unit: Unit):
@@ -23,7 +23,7 @@ func _on_do_inspect(unit: Unit):
 
 func _on_placed_unit(type: GridUnitType):
 	print("Unit placed");
-	$HUDLayer/HUD/DeployableGarrison._in_placed_unit(type);
+	$HUDLayer/HUD/Deployable/DeployableGarrison._in_placed_unit(type);
 
 func _on_selected_shadow(type: GridUnitType):
 	print("Level registered select shadow");

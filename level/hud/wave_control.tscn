@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cb00ng2dxb42s"]
+[gd_scene load_steps=4 format=3 uid="uid://cb00ng2dxb42s"]
 
 [ext_resource type="Script" path="res://level/hud/wave_control.gd" id="1_yutsr"]
-[ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/hud/common_hud_bg.tscn" id="2_yld0g"]
+[ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/hud/background/common_hud_bg.tscn" id="2_yld0g"]
+[ext_resource type="Theme" uid="uid://bteolalfanx77" path="res://theme/base_theme.tres" id="3_v6qwl"]
 
 [node name="WaveControl" type="Control"]
 layout_mode = 3
@@ -22,6 +23,7 @@ offset_top = 50.0
 offset_right = 154.5
 offset_bottom = 150.0
 grow_horizontal = 2
+theme = ExtResource("3_v6qwl")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "[center]Time until next wave:[/center]"
@@ -44,9 +46,11 @@ offset_top = 152.0
 offset_right = 200.0
 offset_bottom = 232.0
 grow_horizontal = 2
+theme = ExtResource("3_v6qwl")
 theme_override_font_sizes/normal_font_size = 60
 theme_override_font_sizes/bold_font_size = 60
 bbcode_enabled = true
+scroll_active = false
 
 [node name="WaveUnitTimer" type="Timer" parent="."]
 

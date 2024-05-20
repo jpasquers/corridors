@@ -19,7 +19,7 @@ func _init(
 static func TEST():
 	return LevelStartConfig.new(
 		MapConfig.new(
-			Vector2(60,30),
+			Vector2(40,20),
 			0.1,
 			2
 		),
