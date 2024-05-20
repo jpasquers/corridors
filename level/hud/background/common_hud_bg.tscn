@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://level/hud/background/common_hud_bg.gd" id="1_ij66y"]
 [ext_resource type="Shader" path="res://level/hud/background/common_hud_bg.gdshader" id="1_yw12q"]
 [ext_resource type="Texture2D" uid="uid://b1d3iooa1ceb6" path="res://level/hud/background/vert_bark.jpg" id="2_04v0v"]
-[ext_resource type="Texture2D" uid="uid://c35votg7p4jnm" path="res://menu/bg.png" id="2_dn2mv"]
+[ext_resource type="Texture2D" uid="uid://b6vt56v23f54c" path="res://level/hud/background/outer.png" id="2_hhmt6"]
 [ext_resource type="Texture2D" uid="uid://c64in021memof" path="res://level/hud/background/wrinkles.jpg" id="2_q31b2"]
 [ext_resource type="Theme" uid="uid://bteolalfanx77" path="res://theme/base_theme.tres" id="3_k4img"]
 [ext_resource type="Shader" path="res://level/hud/background/common_hud_bg_rope.gdshader" id="5_u0qr0"]
@@ -68,7 +68,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_dn2mv")
+texture = ExtResource("2_hhmt6")
 expand_mode = 1
 
 [node name="BG" type="TextureRect" parent="Outer"]
@@ -87,17 +87,26 @@ theme = ExtResource("3_k4img")
 texture = SubResource("GradientTexture2D_1s6ww")
 stretch_mode = 6
 
-[node name="TopRope" type="TextureRect" parent="Outer"]
+[node name="Rope1" type="TextureRect" parent="Outer"]
 z_index = 1
 material = SubResource("ShaderMaterial_xsaqi")
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = -1
+anchor_top = 0.905
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1367.0
-offset_right = 24.0
-offset_bottom = 1440.0
+offset_top = -0.400046
 grow_horizontal = 2
 grow_vertical = 0
+texture = SubResource("GradientTexture2D_p1854")
+
+[node name="Rope2" type="TextureRect" parent="Outer"]
+z_index = 1
+material = SubResource("ShaderMaterial_xsaqi")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.091
+offset_bottom = 0.319992
+grow_horizontal = 2
 texture = SubResource("GradientTexture2D_p1854")
