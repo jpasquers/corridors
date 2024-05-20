@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bk0lo5wrhb5vl"]
+[gd_scene load_steps=19 format=3 uid="uid://bk0lo5wrhb5vl"]
 
 [ext_resource type="Script" path="res://level/hud/background/common_hud_bg.gd" id="1_ij66y"]
 [ext_resource type="Shader" path="res://level/hud/background/common_hud_bg.gdshader" id="1_yw12q"]
 [ext_resource type="Texture2D" uid="uid://b1d3iooa1ceb6" path="res://level/hud/background/vert_bark.jpg" id="2_04v0v"]
+[ext_resource type="Texture2D" uid="uid://c35votg7p4jnm" path="res://menu/bg.png" id="2_dn2mv"]
 [ext_resource type="Texture2D" uid="uid://c64in021memof" path="res://level/hud/background/wrinkles.jpg" id="2_q31b2"]
 [ext_resource type="Theme" uid="uid://bteolalfanx77" path="res://theme/base_theme.tres" id="3_k4img"]
 [ext_resource type="Shader" path="res://level/hud/background/common_hud_bg_rope.gdshader" id="5_u0qr0"]
@@ -59,26 +60,44 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ij66y")
 
-[node name="BG" type="TextureRect" parent="."]
+[node name="Outer" type="TextureRect" parent="."]
 z_index = -1
-material = SubResource("ShaderMaterial_hapbq")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_dn2mv")
+expand_mode = 1
+
+[node name="BG" type="TextureRect" parent="Outer"]
+material = SubResource("ShaderMaterial_hapbq")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3_k4img")
 texture = SubResource("GradientTexture2D_1s6ww")
+stretch_mode = 6
 
-[node name="TopRope" type="TextureRect" parent="."]
+[node name="TopRope" type="TextureRect" parent="Outer"]
+z_index = 1
 material = SubResource("ShaderMaterial_xsaqi")
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -73.0
+offset_top = 1367.0
+offset_right = 24.0
+offset_bottom = 1440.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_p1854")

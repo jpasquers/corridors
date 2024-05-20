@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://level/hud/deploy_garrison/deployable_garrison.gd" id="1_x18ou"]
 
-[node name="DeployableGarrison" type="VBoxContainer"]
+[node name="DeployableGarrison" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

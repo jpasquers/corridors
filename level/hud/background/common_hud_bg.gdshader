@@ -7,11 +7,6 @@ uniform sampler2D vert_bark;
 
 void fragment() {
 	
-	//vec4 fray_value = texture(fray, UV);
-	//float fray_sum = fray_value.r + fray_value.g + fray_value.b;
-	//if (fray_sum < 0.15) {
-		//COLOR.a = 0.0;
-	//}
 	
 	vec4 wrinkle = texture(wrinkles, UV);
 	COLOR.rgb += wrinkle.rgb / vec3(3.0,3.0,3.0);
@@ -30,6 +25,14 @@ void fragment() {
 	if (vert_sum < 0.1) {
 		COLOR.rgb -= vec3(0.1,0.1,0.1);
 	}
+	
+	//float to_edge_x = min(UV.x, 1.0-UV.x);
+	//float to_edge_y = min(UV.y, 1.0-UV.y);
+	//float to_edge = min(to_edge_x, to_edge_y);
+	//if (to_edge < 0.05) {
+		//float rough = (to_edge * 5.0) + 0.1;
+		//COLOR.rgb = vec3(rough, rough/2.0, rough/3.0);	
+	//}
 }
 
 

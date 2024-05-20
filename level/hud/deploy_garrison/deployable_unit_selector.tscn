@@ -17,9 +17,9 @@ script = ExtResource("1_hjcdy")
 [node name="Inner" parent="." instance=ExtResource("2_1bdts")]
 layout_mode = 1
 anchors_preset = -1
+offset_left = 5.0
 offset_top = 10.0
-offset_right = -20.0
-offset_bottom = 10.0
+offset_right = -5.0
 
 [node name="Count" type="RichTextLabel" parent="Inner"]
 z_index = 1
