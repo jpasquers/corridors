@@ -8,8 +8,8 @@ void vertex() {
 }
 
 void fragment() {
-	vec4 fabric_color = texture(fabric, UV / vec2(1.0, 4.0));
-	float y_val = (sin(UV.x*frequency) / 4.0) + 0.5;
+	vec4 fabric_color = texture(fabric, vec2(mod(UV.x,1.0), UV.y));
+	float y_val = (sin(UV.x*frequency) / 4.0) + 0.4;
 	if (UV.y > y_val+0.10 || UV.y < y_val-0.10) {
 		COLOR.a=0.0;
 	}

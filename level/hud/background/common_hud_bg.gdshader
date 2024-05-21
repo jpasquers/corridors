@@ -7,7 +7,6 @@ uniform sampler2D vert_bark;
 
 void fragment() {
 	
-	
 	vec4 wrinkle = texture(wrinkles, UV);
 	COLOR.rgb += wrinkle.rgb / vec3(3.0,3.0,3.0);
 	COLOR.rgb -= vec3(0.1,0.1,0.1);

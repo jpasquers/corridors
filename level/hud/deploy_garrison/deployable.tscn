@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpkqoy03aace4"]
+[gd_scene load_steps=2 format=3 uid="uid://dmai1pqi278bl"]
 
-[ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/hud/background/common_hud_bg.tscn" id="2_4d64f"]
 [ext_resource type="PackedScene" uid="uid://0ndfa61neg7s" path="res://level/hud/deploy_garrison/deployable_garrison.tscn" id="2_xf1o1"]
 
 [node name="Deployable" type="Control"]
@@ -16,10 +15,7 @@ offset_right = 458.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="CommonHudBg" parent="." instance=ExtResource("2_4d64f")]
-layout_mode = 1
-
-[node name="DeployableGarrison" parent="." instance=ExtResource("2_xf1o1")]
+[node name="Garrison" parent="." instance=ExtResource("2_xf1o1")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5

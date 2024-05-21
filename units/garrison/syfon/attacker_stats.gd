@@ -25,7 +25,9 @@ func do_ramp(enemy: Enemy):
 	else:
 		ramps[enemy.unit_id] += base_dmg_ramp_tick;
 
-func get_curr_dmg(enemy: Enemy):
+func get_curr_dmg(enemy: Enemy = null):
+	if (!enemy):
+		return (base_dmg * incr_dmg);
 	if !(enemy.unit_id in ramps):
 		ramps[enemy.unit_id] = 0;
 	return (base_dmg + ramps[enemy.unit_id]) * incr_dmg;

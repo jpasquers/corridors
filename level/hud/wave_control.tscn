@@ -35,6 +35,8 @@ layout_mode = 1
 offset_top = -1.0
 offset_right = 0.000244141
 offset_bottom = -1.0
+freq_min = 6.0
+freq_max = 8.0
 
 [node name="Time" type="RichTextLabel" parent="."]
 layout_mode = 1
