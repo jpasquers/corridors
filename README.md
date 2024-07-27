@@ -48,3 +48,45 @@ he sets his gaze on a lowly consolation prize, the realm of the undead king osir
 - "Winged sun crest" - Attack speed.
 - "Amenta" - symbol of the horizon. Range item.
 - Headdress - range
+
+
+### TODO list
+
+- Item basics:
+	Name, description, mini icon
+	Interaction with unit stats
+	Custom modifiers
+	Items assigned to units - how
+	Selected unit displays items
+- Deployable sub type:
+	rename deployable garrison
+	build tab selector
+	split out config
+	abstract lister
+	key bindings
+- Top right: stats
+	Health - basic -1 enemy escape
+	Income - basic +1 dmg, +10 kill
+- Mid right: shop
+	Shop Icon visible always
+	Click shop brings out shop
+	Purchaseable config - units, items
+- Eye of horus POC
+	- incrementing beam damage.
+	- art/animation
+	- beam particle effects
+	- enemy impact effects
+- Hyksos POC
+	- front swing, back swing. attack speed relation. gahhhh
+	- archer
+	- art/animation
+	- particle start point
+- Conscript POC
+	- basic undead enemy
+	- art/animation
+	- death animation
+- Top left: Menu
+	Quit
+	Settings
+
+	

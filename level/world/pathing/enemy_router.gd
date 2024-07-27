@@ -26,6 +26,8 @@ func add_enemy(enemy: Enemy):
 	follow.bind_recipient(enemy);
 	follow.reached_end.connect(_on_reached_end);
 
+# Generate and bind a single curve2d from the list of paths
+# (Since path2d requires a curve2d)
 func rebuild_follow_curve(in_point_paths):
 	point_paths = in_point_paths;
 	var all = [];
@@ -35,6 +37,7 @@ func rebuild_follow_curve(in_point_paths):
 	for point in all:
 		curve.add_point(point);
 	set_curve(curve);
+	
 	
 func _on_reached_end(follower: EnemyFollowRoute):
 	followers = followers.filter(func do(a_follower):
