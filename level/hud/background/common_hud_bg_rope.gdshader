@@ -2,15 +2,17 @@ shader_type canvas_item;
 
 uniform sampler2D fabric;
 uniform float frequency = 5.0;
+uniform float vert_displace = 0.4;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
 }
 
 void fragment() {
-	vec4 fabric_color = texture(fabric, vec2(mod(UV.x,1.0), UV.y));
-	float y_val = (sin(UV.x*frequency) / 4.0) + 0.4;
-	if (UV.y > y_val+0.10 || UV.y < y_val-0.10) {
+	vec2 zoomed = UV.xy * vec2(2.0,2.0);
+	vec4 fabric_color = texture(fabric, vec2(mod(zoomed.x,1.0), mod(zoomed.y, 1.0)));
+	float y_val = (sin(UV.x*frequency) / 4.0) + vert_displace;
+	if (UV.y > y_val+0.05 || UV.y < y_val-0.05) {
 		COLOR.a=0.0;
 	}
 	else {

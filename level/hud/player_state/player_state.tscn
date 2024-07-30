@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwh4nqjtox2sn"]
+
+[ext_resource type="Script" path="res://level/hud/player_state/player_state.gd" id="1_svtu7"]
+[ext_resource type="Theme" uid="uid://bteolalfanx77" path="res://theme/base_theme.tres" id="2_md5r4"]
+
+[node name="PlayerState" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_svtu7")
+
+[node name="Rows" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 110.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KaRow" type="HBoxContainer" parent="Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="KaValue" type="RichTextLabel" parent="Rows/KaRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_md5r4")
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 60
+bbcode_enabled = true
+text = "[b]ABC[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="LivesRow" type="HBoxContainer" parent="Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="LivesValue" type="RichTextLabel" parent="Rows/LivesRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_md5r4")
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 60
+bbcode_enabled = true
+text = "[b]ABC[/b]"
+fit_content = true
+scroll_active = false

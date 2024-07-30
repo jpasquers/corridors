@@ -46,6 +46,7 @@ fill_to = Vector2(0.0512821, 0.292735)
 resource_local_to_scene = true
 shader = ExtResource("5_u0qr0")
 shader_parameter/frequency = 5.0
+shader_parameter/vert_displace = 0.4
 shader_parameter/fabric = ExtResource("8_127ea")
 
 [sub_resource type="Gradient" id="Gradient_sh0vm"]
@@ -93,7 +94,7 @@ grow_vertical = 2
 theme = ExtResource("3_k4img")
 texture = SubResource("GradientTexture2D_1s6ww")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 1
 
 [node name="Rope1" type="TextureRect" parent="Outer"]
 z_index = 1

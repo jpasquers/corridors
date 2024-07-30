@@ -19,9 +19,11 @@ void fragment() {
 		COLOR.g -= orange_diff / 16.0;
 	}
 	
-	vec4 vert = texture(vert_bark, UV);
+	vec2 zoomed = UV.xy * vec2(3.0,3.0);
+	vec2 normalized = vec2(mod(zoomed.x,1.0), mod(zoomed.y,1.0));
+	vec4 vert = texture(vert_bark, normalized);
 	float vert_sum = vert.r + vert.g + vert.b;
-	if (vert_sum < 0.1) {
+	if (vert_sum < 0.05) {
 		COLOR.rgb -= vec3(0.1,0.1,0.1);
 	}
 	

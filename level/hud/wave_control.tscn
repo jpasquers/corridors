@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cb00ng2dxb42s"]
+[gd_scene load_steps=5 format=3 uid="uid://cb00ng2dxb42s"]
 
 [ext_resource type="Script" path="res://level/hud/wave_control.gd" id="1_yutsr"]
 [ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/hud/background/common_hud_bg.tscn" id="2_yld0g"]
 [ext_resource type="Theme" uid="uid://bteolalfanx77" path="res://theme/base_theme.tres" id="3_v6qwl"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_f541p"]
+size = Vector2(64, 64)
 
 [node name="WaveControl" type="Control"]
 layout_mode = 3
@@ -26,7 +29,7 @@ grow_horizontal = 2
 theme = ExtResource("3_v6qwl")
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[center]Time until next wave:[/center]"
+text = "[center]Next Wave:[/center]"
 scroll_active = false
 
 [node name="CommonHudBg" parent="." instance=ExtResource("2_yld0g")]
@@ -37,6 +40,19 @@ offset_right = 0.000244141
 offset_bottom = -1.0
 freq_min = 6.0
 freq_max = 8.0
+ropes_top = false
+
+[node name="WaveUnitIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 133.0
+offset_right = 32.0
+offset_bottom = 197.0
+grow_horizontal = 2
+texture = SubResource("PlaceholderTexture2D_f541p")
 
 [node name="Time" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -44,9 +60,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -200.0
-offset_top = 152.0
+offset_top = 237.0
 offset_right = 200.0
-offset_bottom = 232.0
+offset_bottom = 317.0
 grow_horizontal = 2
 theme = ExtResource("3_v6qwl")
 theme_override_font_sizes/normal_font_size = 60
@@ -58,12 +74,13 @@ scroll_active = false
 
 [node name="StartEarly" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -104.0
-offset_top = 272.0
-offset_right = 96.0
-offset_bottom = 328.0
+offset_left = -100.0
+offset_top = 320.0
+offset_right = 100.0
+offset_bottom = 376.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 26
 text = "Start Early"

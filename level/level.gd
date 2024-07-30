@@ -7,6 +7,7 @@ var shadow: GridUnitType;
 
 func set_level_start_config(in_level_config: LevelStartConfig):
 	$GameWorld/Map.set_map_config(in_level_config.map_config);
+	$HUDLayer/HUD/PlayerState.set_boot_player_state(in_level_config.boot_player_state);
 	$HUDLayer/HUD/BottomRow/Deployable/Garrison.set_boot_deployable_garrison(in_level_config.boot_deployable_garrison);
 	$HUDLayer/HUD/WaveControl.set_waves_config(in_level_config.waves_config);
 	level_start_config = in_level_config;
