@@ -25,7 +25,6 @@ func set_time_till_next_wave(time: float):
 	if adjusted == 0 and !wave_alive:
 		start_wave();
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$WaveUnitTimer.connect("timeout", _on_unit_timer);
 	$StartEarly.connect("button_up", _on_start_early);
@@ -59,7 +58,6 @@ func _in_wave_ended():
 	wave_alive = false;
 	up_wave_idx+=1;
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	set_time_till_next_wave(time_till_next_wave - delta);
 

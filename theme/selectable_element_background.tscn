@@ -1,13 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://btdebxhclgwkr"]
+[gd_scene load_steps=2 format=3 uid="uid://6s4mnd0ka2qd"]
 
-[sub_resource type="Gradient" id="Gradient_7vb3c"]
-offsets = PackedFloat32Array(0.00483092, 1)
-colors = PackedColorArray(0.118581, 0.118581, 0.118581, 1, 0.183978, 0.188529, 0.186339, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tyrqx"]
-gradient = SubResource("Gradient_7vb3c")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[ext_resource type="Texture2D" uid="uid://c60k8q188q4xm" path="res://elements/element_bg.tres" id="1_f531m"]
 
 [node name="SelectableElementBackground" type="TextureRect"]
 anchors_preset = 15
@@ -15,4 +8,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_tyrqx")
+texture = ExtResource("1_f531m")

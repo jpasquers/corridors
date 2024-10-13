@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://hik8an4dahnj"]
+
+[ext_resource type="Texture2D" uid="uid://bv01bxqocgccp" path="res://elements/units/enemy/ammit_kin_demo/frames.png" id="1_dqahw"]
+[ext_resource type="Script" path="res://elements/units/enemy/ammit_kin_demo/ammit_kin_demo.gd" id="1_xsuhx"]
+[ext_resource type="PackedScene" uid="uid://b6ab82f75axo7" path="res://elements/units/components/health_component.tscn" id="2_sl6cu"]
+[ext_resource type="PackedScene" uid="uid://b6leds2fi021r" path="res://elements/units/enemy/enemy_hitbox_component.tscn" id="3_dmbcb"]
+
+[sub_resource type="Animation" id="Animation_edxyv"]
+resource_name = "move_left"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5c8bl"]
+_data = {
+"move_left": SubResource("Animation_edxyv")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2k8oe"]
+radius = 17.0
+height = 124.0
+
+[node name="AmmitKinDemo" type="Node2D"]
+script = ExtResource("1_xsuhx")
+
+[node name="UnitAnim" type="Sprite2D" parent="."]
+texture = ExtResource("1_dqahw")
+hframes = 3
+vframes = 4
+frame = 9
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UnitAnim"]
+libraries = {
+"": SubResource("AnimationLibrary_5c8bl")
+}
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_sl6cu")]
+position = Vector2(0, -22)
+
+[node name="EnemyHitboxComponent" parent="." instance=ExtResource("3_dmbcb")]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitboxComponent"]
+position = Vector2(-1, 15)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2k8oe")
+
+[node name="ForwardMarker" type="Marker2D" parent="."]
+position = Vector2(-21, 11)

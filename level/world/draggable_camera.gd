@@ -4,14 +4,14 @@ class_name DraggableCamera
 
 var dragging = false;
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 func _process(delta):
-	pass
+	if Input.is_action_just_released("cam_z_out"):
+		zoom = zoom - Vector2(0.1,0.1);
+	if Input.is_action_just_released("cam_z_in"):
+		zoom = zoom + Vector2(0.1,0.1);
 
 func _input(event):
 	if event is InputEventMouseButton:

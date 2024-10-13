@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk6or68brsu4n"]
+
+[ext_resource type="Script" path="res://level/hud/shop/shop.gd" id="1_7ripl"]
+[ext_resource type="Texture2D" uid="uid://cvba034ebybfn" path="res://level/hud/shop/shop_demo.png" id="1_8b30e"]
+[ext_resource type="Texture2D" uid="uid://c4lnoklgy38jo" path="res://level/hud/shop/shop_demo_hover.png" id="2_rqhxk"]
+[ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/hud/background/common_hud_bg.tscn" id="4_a6tco"]
+
+[sub_resource type="Animation" id="Animation_41jd8"]
+resource_name = "close"
+
+[sub_resource type="Animation" id="Animation_ai64g"]
+resource_name = "open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1920, 2.08165e-12), Vector2(2.08165e-12, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osww6"]
+_data = {
+"close": SubResource("Animation_41jd8"),
+"open": SubResource("Animation_ai64g")
+}
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ripl")
+
+[node name="OpenShop" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -125.0
+offset_bottom = 131.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_8b30e")
+texture_pressed = ExtResource("2_rqhxk")
+texture_hover = ExtResource("2_rqhxk")
+
+[node name="ShopBody" type="Control" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1920.0
+offset_right = 1920.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CommonHudBg" parent="ShopBody" instance=ExtResource("4_a6tco")]
+layout_mode = 1
+ropes_bottom = false
+
+[node name="Anims" type="AnimationPlayer" parent="ShopBody"]
+libraries = {
+"": SubResource("AnimationLibrary_osww6")
+}

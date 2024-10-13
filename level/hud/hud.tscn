@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7c17u32q6y6x"]
+[gd_scene load_steps=8 format=3 uid="uid://c7c17u32q6y6x"]
 
 [ext_resource type="PackedScene" uid="uid://cb00ng2dxb42s" path="res://level/hud/wave_control.tscn" id="1_oph2f"]
-[ext_resource type="PackedScene" uid="uid://dmai1pqi278bl" path="res://level/hud/deploy_garrison/deployable.tscn" id="1_w158h"]
+[ext_resource type="PackedScene" uid="uid://dmai1pqi278bl" path="res://level/hud/deployable/deployable_groups.tscn" id="1_w158h"]
 [ext_resource type="PackedScene" uid="uid://bk0lo5wrhb5vl" path="res://level/hud/background/common_hud_bg.tscn" id="2_fac08"]
 [ext_resource type="PackedScene" uid="uid://t3ygdg1xfp65" path="res://level/hud/inspect/inspect_garrison.tscn" id="3_v36hv"]
 [ext_resource type="Texture2D" uid="uid://b6vt56v23f54c" path="res://level/hud/background/outer.png" id="5_h780k"]
 [ext_resource type="PackedScene" uid="uid://dwh4nqjtox2sn" path="res://level/hud/player_state/player_state.tscn" id="6_6jykf"]
+[ext_resource type="PackedScene" uid="uid://bk6or68brsu4n" path="res://level/hud/shop/shop.tscn" id="7_v0il8"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -26,54 +27,63 @@ offset_bottom = 439.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="BottomRow" parent="." instance=ExtResource("2_fac08")]
+[node name="Bottom" parent="." instance=ExtResource("2_fac08")]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.755
-offset_top = -0.400024
+anchor_top = 1.0
+offset_top = -363.0
 grow_vertical = 0
 freq_min = 6.0
 rope_vert_displace = 0.7
 ropes_top = false
 ropes_bottom = false
 
-[node name="Deployable" parent="BottomRow" instance=ExtResource("1_w158h")]
+[node name="Row" type="HBoxContainer" parent="Bottom"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0
-anchor_top = 0.041
-anchor_bottom = 0.945
-offset_left = 28.0
-offset_top = 4.117
-offset_right = -0.800049
-offset_bottom = -0.0350342
-
-[node name="InspectGarrison" parent="BottomRow" instance=ExtResource("3_v36hv")]
-z_index = 2
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.091
-offset_left = 0.119995
-offset_top = -0.0330009
-offset_right = -31.0
-offset_bottom = -31.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Divider" type="TextureRect" parent="BottomRow"]
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -18.0
-offset_right = 19.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Left" type="Control" parent="Bottom/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="DeployableGroups" parent="Bottom/Row/Left" instance=ExtResource("1_w158h")]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 44.0
+offset_top = 64.0
+offset_right = 7.0
+offset_bottom = -81.0
+
+[node name="Divider" type="TextureRect" parent="Bottom/Row"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.83
 texture = ExtResource("5_h780k")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="Right" type="Control" parent="Bottom/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="InspectGarrison" parent="Bottom/Row/Right" instance=ExtResource("3_v36hv")]
+z_index = 2
+layout_mode = 2
+anchors_preset = 0
+anchor_left = -0.009
+offset_left = 0.433001
+offset_top = 48.0
+offset_right = -33.0
+offset_bottom = -51.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="PlayerState" parent="." instance=ExtResource("6_6jykf")]
 layout_mode = 1
@@ -81,6 +91,17 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_bottom = 0.0
 offset_left = -216.0
-offset_bottom = 329.0
+offset_bottom = 267.0
 grow_horizontal = 0
 grow_vertical = 1
+
+[node name="Shop" parent="." instance=ExtResource("7_v0il8")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.463
+anchor_bottom = 0.463
+offset_left = -455.0
+offset_top = -412.24
+offset_bottom = 412.76
+grow_horizontal = 0

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6gmq5t77jngd"]
+
+[ext_resource type="Script" path="res://level/world/map/modifiers/map_modifier.gd" id="1_yh65r"]
+
+[sub_resource type="Gradient" id="Gradient_oof6q"]
+offsets = PackedFloat32Array(0, 0.548458)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3rvvj"]
+gradient = SubResource("Gradient_oof6q")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="MapModifier" type="Node2D"]
+script = ExtResource("1_yh65r")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 1, 1, 0.580392)
+energy = 1.37
+shadow_color = Color(0, 0, 0, 0.235294)
+shadow_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_3rvvj")
+texture_scale = 20.0

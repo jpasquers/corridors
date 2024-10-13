@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6leds2fi021r"]
-
-[ext_resource type="Script" path="res://units/enemy/enemy_hitbox_component.gd" id="1_ayov3"]
-
-[node name="EnemyHitboxComponent" type="Area2D"]
-collision_layer = 2
-collision_mask = 4
-script = ExtResource("1_ayov3")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqts7tx8ore55"]
+
+[ext_resource type="Script" path="res://level/hud/deployable/deployable_group.gd" id="1_7ss15"]
+
+[node name="DeployableGroup" type="HBoxContainer"]
+script = ExtResource("1_7ss15")

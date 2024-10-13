@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://big6111tpeudu"]
+
+[ext_resource type="Script" path="res://elements/items/item_shadow.gd" id="1_oqwhg"]
+
+[node name="ItemShadow" type="Node2D"]
+script = ExtResource("1_oqwhg")
+
+[node name="ItemImage" type="Sprite2D" parent="."]

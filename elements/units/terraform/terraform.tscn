@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://srpqutotmfnu"]
+
+[ext_resource type="Script" path="res://elements/units/terraform/terraform.gd" id="1_d3cx0"]
+
+[node name="Terraform" type="Node2D"]
+script = ExtResource("1_d3cx0")

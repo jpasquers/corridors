@@ -94,7 +94,7 @@ grow_vertical = 2
 theme = ExtResource("3_k4img")
 texture = SubResource("GradientTexture2D_1s6ww")
 expand_mode = 1
-stretch_mode = 1
+stretch_mode = 6
 
 [node name="Rope1" type="TextureRect" parent="Outer"]
 z_index = 1

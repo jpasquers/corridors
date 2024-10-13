@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://0ndfa61neg7s"]
+
+[ext_resource type="Script" path="res://level/hud/deployable/deployable_garrison.gd" id="1_x18ou"]
+
+[node name="DeployableGarrison" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 25
+alignment = 1
+script = ExtResource("1_x18ou")

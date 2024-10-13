@@ -13,3 +13,10 @@ script = ExtResource("1_m1vox")
 [node name="DraggableCamera" parent="." instance=ExtResource("11_y665d")]
 
 [node name="Pathing" parent="." instance=ExtResource("5_ytc1o")]
+
+[node name="Moon" type="DirectionalLight2D" parent="."]
+color = Color(0.611765, 0.74902, 1, 0.764706)
+energy = 0.0
+range_item_cull_mask = 3
+shadow_color = Color(0.419608, 0.419608, 0.419608, 1)
+shadow_item_cull_mask = 2

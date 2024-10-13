@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bteolalfanx77"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://bteolalfanx77"]
 
 [ext_resource type="FontFile" uid="uid://b7bptvks8giwh" path="res://theme/papyrus.ttf" id="1_l44bn"]
 
@@ -90,6 +90,46 @@ content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wad4t"]
+content_margin_left = 10.0
+content_margin_top = 20.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lat8u"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdak5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmpmd"]
+content_margin_left = 10.0
+content_margin_top = 0.0
+content_margin_right = 10.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 3
+border_color = Color(0.0784314, 0.0784314, 0.0784314, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbgs8"]
+content_margin_left = 10.0
+content_margin_top = 0.0
+content_margin_right = 10.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 3
+border_color = Color(0.0784314, 0.0784314, 0.0784314, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s154f"]
+content_margin_left = 10.0
+content_margin_top = 0.0
+content_margin_right = 10.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.0784314, 0.0784314, 0.0784314, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_au56c"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [resource]
 default_font = ExtResource("1_l44bn")
 default_font_size = 32
@@ -130,3 +170,15 @@ RichTextLabel/constants/text_highlight_h_padding = 3
 RichTextLabel/constants/text_highlight_v_padding = 3
 RichTextLabel/styles/focus = SubResource("StyleBoxFlat_klgsk")
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_1xlvv")
+TabContainer/colors/drop_mark_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_hovered_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_unselected_color = Color(0, 0, 0, 1)
+TabContainer/constants/icon_max_width = 0
+TabContainer/styles/panel = SubResource("StyleBoxFlat_wad4t")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_lat8u")
+TabContainer/styles/tab_focus = SubResource("StyleBoxFlat_wdak5")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_dmpmd")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_cbgs8")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_s154f")
+TabContainer/styles/tabbar_background = SubResource("StyleBoxFlat_au56c")

@@ -3,9 +3,11 @@
 
 ## Terminology
 
-- Unit = Anything that is placable within the map grid.
-	- Garrison = Any unit that can be harmed by enemies
-	- Terraform = Any unit that cannot be harmed by enemies
+- Element = a modular piece or building block of the game world. Consists of:
+	- Units = Anything that acts and is placable within the map
+		- Enemies = Units that follow the path
+		- Garrison = Units built by the player.
+		- Terraform = Modifications to the map added by the player.
 	
 ## Lore / Premise
 
@@ -42,13 +44,16 @@ he sets his gaze on a lowly consolation prize, the realm of the undead king osir
 
 ### Items
 
-- "Wreath of vindication" - Given to people after weighing the heart
+- simple whetstone - attack damage
 - "Benu's amulet" - protects the heart.
-- "Coffer of the viper" - Nehebkau the snake god was part of the 'collector of souls'
 - "Winged sun crest" - Attack speed.
 - "Amenta" - symbol of the horizon. Range item.
 - Headdress - range
 
+### Boons
+
+- "Wreath of vindication" - Given to people after weighing the heart
+- "Coffer of the viper" - Nehebkau the snake god was part of the 'collector of souls'
 
 ### TODO list
 
@@ -90,3 +95,8 @@ he sets his gaze on a lowly consolation prize, the realm of the undead king osir
 	Settings
 
 	
+
+Credits:
+	
+- Crocodile demo art -> https://opengameart.org/content/crocodile-1
+	- (just a link back to the site)

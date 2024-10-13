@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmai1pqi278bl"]
+
+[ext_resource type="Script" path="res://level/hud/deployable/deployable_groups.gd" id="1_hf5gs"]
+[ext_resource type="PackedScene" uid="uid://0ndfa61neg7s" path="res://level/hud/deployable/deployable_garrison.tscn" id="2_xf1o1"]
+[ext_resource type="Script" path="res://level/hud/deployable/deployable_items.gd" id="3_w5oxf"]
+
+[node name="DeployableGroups" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hf5gs")
+
+[node name="Garrison" parent="." instance=ExtResource("2_xf1o1")]
+layout_mode = 2
+
+[node name="Items" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+script = ExtResource("3_w5oxf")

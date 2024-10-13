@@ -1,0 +1,37 @@
+[gd_scene load_steps=10 format=3 uid="uid://danghfyuq58kh"]
+
+[ext_resource type="Shader" path="res://level/world/map/bg/bg.gdshader" id="1_a5bcp"]
+[ext_resource type="Texture2D" uid="uid://cjtra37et1a5i" path="res://level/world/map/bg/bg_rough.png" id="2_sgnid"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d2luj"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kbiok"]
+noise = SubResource("FastNoiseLite_d2luj")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d6t74"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7vbxe"]
+noise = SubResource("FastNoiseLite_d6t74")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxmih"]
+shader = ExtResource("1_a5bcp")
+shader_parameter/roughnesses = ExtResource("2_sgnid")
+shader_parameter/dark_noises = SubResource("NoiseTexture2D_kbiok")
+shader_parameter/silver_noises = SubResource("NoiseTexture2D_7vbxe")
+
+[sub_resource type="Gradient" id="Gradient_ehoey"]
+colors = PackedColorArray(0.142913, 0.0647602, 0.0012715, 1, 0.142913, 0.0647602, 0.0012715, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b0x3v"]
+gradient = SubResource("Gradient_ehoey")
+
+[node name="Bg" type="TextureRect"]
+material = SubResource("ShaderMaterial_fxmih")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_b0x3v")

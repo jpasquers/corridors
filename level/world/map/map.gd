@@ -11,7 +11,8 @@ var DEFAULT_WIDTH = 20;
 var DEFAULT_HEIGHT = 20;
 var DEFAULT_DENSITY = 0.2;
 var DEFAULT_CHECKPOINT_COUNT = 2;
-var GRASS_TILE_IDX = 3;
+# Not a real tile idx, preserved for the tile mapping.
+var GROUND_TILE_IDX = 3;
 var WALL_TILE_IDX = 2;
 var START_TILE_IDX = 1;
 var FINISH_TILE_IDX = 4;
@@ -24,14 +25,16 @@ var CHECKPOINT_TILE_IDX_MAP = {
 	2: CHECKPOINT_2_TILE_IDX,
 	3: CHECKPOINT_3_TILE_IDX
 };
+var MODIFIER_TILE_IDX = 9;
 
 #Layers
 var TERRAIN_LAYER = 0;
 var MARKERS_LAYER = 1;
 
 
-#TileSet sources. Static source includes most terrain and markers.
-var STATIC_TILE_SET_SOURCE_ID = 0;
+#TileSet sources
+var MARKERS_TILE_SET_SOURCE_ID = 0;
+var WALL_TILE_SET_SOURCE_ID = 1;
 
 
 var map_config: MapConfig;
@@ -44,6 +47,7 @@ var start_position: Vector2i;
 var finish_position: Vector2i;
 var checkpoint_positions: Array[Vector2i] = [];
 
+var modifiers: Array[MapModifier];
 
 #Maps tile positions to MapTileLayers
 var tile_info_map: Dictionary = {};
@@ -51,12 +55,10 @@ var tile_info_map: Dictionary = {};
 func set_map_config(in_map_config: MapConfig):
 	map_config = in_map_config;
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	# We let the game world tell us to init, so there's no ordering issues.
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_released("lmb"):
 		var tile = get_mouse_pos_tile();
@@ -126,12 +128,26 @@ func all_tile_positions() -> Array[Vector2i]:
 	
 
 func generate_all():
+	_gen_wall_tile_set();
+	_gen_background();
 	_populate_empty_grid();
 	_gen_base_layer();
 	_determine_grass_play_region();
 	_gen_start();
 	_gen_finish();
 	_gen_checkpoints();
+	_gen_modifiers();
+	
+	
+func _gen_wall_tile_set():
+	tile_set.add_source(
+		WallFactory.generate_tile_set_source(),
+		WALL_TILE_SET_SOURCE_ID
+	);
+
+func _gen_background():
+	$Bg.size.x = grid_point_width();
+	$Bg.size.y = grid_point_height();
 
 func _gen_start():
 	start_position = unmarked_grass_play_positions().pick_random();
@@ -142,6 +158,12 @@ func _gen_finish():
 	finish_position = unmarked_grass_play_positions().pick_random();
 	_place_finish(finish_position);
 	tile_info_map[finish_position].marker_tile_id = FINISH_TILE_IDX;
+
+func _gen_modifiers():
+	for i in range(0,map_config.modifier_count):
+		var mod_position = unmarked_wall_positions().pick_random();
+		_place_modifier(mod_position, 1.0);
+		tile_info_map[mod_position].marker_tile_id = MODIFIER_TILE_IDX;
 
 func _gen_checkpoints():
 	var ct = checkpoint_count();
@@ -162,25 +184,34 @@ func unmarked_grass_play_positions() -> Array[Vector2i]:
 			return tile_info_map[position].marker_tile_id == -1;
 	);
 
-func _place_grass(pos: Vector2i):
-	set_cell(TERRAIN_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), GRASS_TILE_IDX); 
+func unmarked_wall_positions() -> Array[Vector2i]:
+	return wall_positions.filter(
+		func has_no_marker(position):
+			return tile_info_map[position].marker_tile_id == -1;
+	)
 	
-func _place_hill(pos: Vector2i):
-	set_cell(TERRAIN_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), WALL_TILE_IDX);
+func _place_wall(pos: Vector2i, wall_idx: int):
+	set_cell(TERRAIN_LAYER, pos, WALL_TILE_SET_SOURCE_ID, Vector2i(0,0), wall_idx);
 	
 func _place_tester(pos: Vector2i):
-	set_cell(TERRAIN_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), TESTER_TILE_IDX);  
+	set_cell(TERRAIN_LAYER, pos, MARKERS_TILE_SET_SOURCE_ID, Vector2i(0,0), TESTER_TILE_IDX);  
 
 func _place_start(pos: Vector2i):
-	set_cell(MARKERS_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), START_TILE_IDX);
+	set_cell(MARKERS_LAYER, pos, MARKERS_TILE_SET_SOURCE_ID, Vector2i(0,0), START_TILE_IDX);
 
 func _place_finish(pos: Vector2i):
-	set_cell(MARKERS_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), FINISH_TILE_IDX);
+	set_cell(MARKERS_LAYER, pos, MARKERS_TILE_SET_SOURCE_ID, Vector2i(0,0), FINISH_TILE_IDX);
 
 func _place_checkpoint(pos: Vector2i, idx: int):
 	var tile_idx = CHECKPOINT_TILE_IDX_MAP[idx];
-	set_cell(MARKERS_LAYER, pos, STATIC_TILE_SET_SOURCE_ID, Vector2i(0,0), tile_idx);
+	set_cell(MARKERS_LAYER, pos, MARKERS_TILE_SET_SOURCE_ID, Vector2i(0,0), tile_idx);
 		
+func _place_modifier(pos: Vector2i, mod: float):
+	var full_position = map_to_local(pos);
+	var scene = load("res://level/world/map/modifiers/map_modifier.tscn");
+	var instance = scene.instantiate();
+	instance.position = full_position;
+	add_child(instance);
 
 # The "grass play" region is the largest region of interconnected grass tiles.
 # Calculated by grouping all grass tiles into disparate "regions".
@@ -224,17 +255,41 @@ func _generate_region_from(base: Vector2i, all: Array[Vector2i]):
 		region.append_array(viable);
 		explore_queue.append_array(viable);
 	return region;
-
+	
+# Assumes the tile_info_map is populated.
+func wall_adj_for(pos: Vector2i)->String:
+	var top_pos = pos - Vector2i(0,1);
+	var right_pos = pos + Vector2i(1,0);
+	var bottom_pos = pos + Vector2i(0,1);
+	var left_pos = pos - Vector2i(1,0);
+	var adj = "";
+	if (tile_info_map.has(top_pos) && 
+			tile_info_map[top_pos].terrain_tile_id == WALL_TILE_IDX):
+		adj += "t";
+	if (tile_info_map.has(right_pos) && 
+			tile_info_map[right_pos].terrain_tile_id == WALL_TILE_IDX):
+		adj += "r";
+	if (tile_info_map.has(bottom_pos) && 
+			tile_info_map[bottom_pos].terrain_tile_id == WALL_TILE_IDX):
+		adj += "b";
+	if (tile_info_map.has(left_pos) && 
+			tile_info_map[left_pos].terrain_tile_id == WALL_TILE_IDX):
+		adj += "l";
+	return adj;
+		
 func _gen_base_layer():
 	for position in all_tile_positions():
 		if randi() % 100 <= density()*100:
-			_place_hill(position);
 			tile_info_map[position].terrain_tile_id = WALL_TILE_IDX;
 			wall_positions.push_front(position);
 		else: 
-			_place_grass(position);
-			tile_info_map[position].terrain_tile_id = GRASS_TILE_IDX;
+			tile_info_map[position].terrain_tile_id = GROUND_TILE_IDX;
 			all_grass_positions.push_front(position);
+	for position in tile_info_map:
+		if tile_info_map[position].terrain_tile_id == WALL_TILE_IDX:
+			var adjacency = wall_adj_for(position);
+			var tile_idx = WallFactory.ADJ_TILE_ID_MAP[adjacency];
+			_place_wall(position, tile_idx);
 
 func _populate_empty_grid():
 	for position in all_tile_positions():

@@ -15,7 +15,6 @@ func _ready():
 	#We wait to init so there are no ordering issues.
 	pass;
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 

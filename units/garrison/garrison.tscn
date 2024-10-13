@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://4vbu53ida6qs"]
-
-[ext_resource type="Script" path="res://units/garrison/garrison.gd" id="1_igyks"]
-
-[node name="Garrison" type="Node2D"]
-script = ExtResource("1_igyks")

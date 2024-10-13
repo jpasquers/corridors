@@ -2,7 +2,9 @@ extends Control
 
 var inspectee: Garrison;
 
-var eles: Array[RichTextLabel] = [];
+var stat_eles: Array[RichTextLabel] = [];
+var item_eles: Array[ElementView] = [];
+var COUNT_ITEM_SLOTS_VISIBLE = 5;
 
 func common_txt()->RichTextLabel:
 	var stat = RichTextLabel.new();
@@ -26,14 +28,15 @@ func range_txt(unit: Garrison)-> RichTextLabel:
 	return stat;
 
 func _in_inspect(unit: Garrison):
-	for ele in eles:
+	for ele in stat_eles:
 		ele.queue_free();
-	eles = [
+
+	stat_eles = [
 		atk_rate_txt(unit),
 		dmg_txt(unit),
 		range_txt(unit)
 	];
-	for ele in eles:
+	for ele in stat_eles:
 		$Stats.add_child(ele);
 	var image: Image = Image.load_from_file(unit.type.simple_view_path);
 	var SCALE = 3;
@@ -41,16 +44,30 @@ func _in_inspect(unit: Garrison):
 	$MiddleSection/Centered/StaticUnitAsset.scale = Vector2i(SCALE,SCALE);
 	$MiddleSection/Centered/StaticUnitAsset.texture = texture;
 	
+	
+	for item in item_eles:
+		item.queue_free();
+	item_eles = [];
+	var blank_count = COUNT_ITEM_SLOTS_VISIBLE - unit.bound_items.size();
+	var element_view_templ = load("res://elements/element_view.tscn");
+	for type in unit.bound_items:
+		var scene = element_view_templ.instantiate();
+		scene.scale_by = 1;
+		scene.type = ElementTypeMap.MAP[type.type_id];
+		item_eles.push_back(scene);
+		$Items.add_child(scene);
+	for i in range(0,blank_count):
+		var scene = ElementView.empty();
+		item_eles.push_back(scene);
+		$Items.add_child(scene);
+
 	inspectee = unit;
 	
 	visible = true;
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = false;
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_released("ui_escape"):
 		inspectee = null;

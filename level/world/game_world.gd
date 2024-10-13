@@ -1,13 +1,14 @@
-extends Node
+extends Node2D
 class_name GameWorld;
 
-signal placed_unit;
 signal do_inspect;
 
 var map_config: MapConfig;
 
-var shadow_type: GridUnitType;
-var shadow: Node2D;
+var unit_shadow_type: GridUnitType;
+var item_shadow_type: ItemType;
+var unit_shadow: UnitShadow;
+var item_shadow: ItemShadow;
 
 var enemies: Array[Node2D] = [];
 
@@ -18,31 +19,42 @@ var enemies: Array[Node2D] = [];
 #Maps tiles to an occupant.
 var tile_occupant_map: Dictionary;
 
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	map.generate_all();
 	map.clicked_tile.connect(clicked_tile);
 	map.hovering_tile.connect(hovering_tile);
 	camera.global_position = map.grid_point_center();
 	pathing.init_pathing(boot_pathing_cfg());
+	Events.player_selected_unit_shadow.connect(set_unit_shadow);
+	Events.player_selected_item_shadow.connect(set_item_shadow);
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+# Items can just use general mouse tracking.
+# Units require tile knowledge, so they depend on map events.
+func _input(event):
+	if event is InputEventMouseMotion:
+		if (!item_shadow_type):
+			return;
+		if (!item_shadow):
+			item_shadow = load("res://elements/items/item_shadow.tscn").instantiate();
+			item_shadow.type = item_shadow_type;
+			add_child(item_shadow);
+		var pos = get_local_mouse_position();		
+		item_shadow.position = pos;
+
 func hovering_tile(tile: Vector2i):
-	if (!shadow_type):
+	if (!unit_shadow_type):
 		return;
-	if (!unit_type_viable_for_tile(shadow_type, tile)):
+	if (!unit_type_viable_for_tile(unit_shadow_type, tile)):
 		return;
-	if (!shadow):
-		shadow = load("res://units/shadow.tscn").instantiate();
-		shadow.type = shadow_type;
-		add_child(shadow);
+	if (!unit_shadow):
+		unit_shadow = load("res://elements/units/shadow.tscn").instantiate();
+		unit_shadow.type = unit_shadow_type;
+		add_child(unit_shadow);
 	var pos = map.map_to_local(tile);
-	shadow.position = pos;
+	unit_shadow.position = pos;
 
 func unit_type_viable_for_tile(type: GridUnitType, tile: Vector2i):
 	if is_occupied(tile):
@@ -55,21 +67,32 @@ func unit_type_viable_for_tile(type: GridUnitType, tile: Vector2i):
 
 func clicked_tile(tile: Vector2i):
 	if is_occupied(tile):
-		do_inspect.emit(tile_occupant_map[tile]);
+		var occupant = tile_occupant_map[tile];
+		if (item_shadow):
+			try_apply_item(occupant, item_shadow_type);
+			item_shadow_type = null;
+			item_shadow.queue_free();
+			item_shadow = null;
+		else:
+			do_inspect.emit(tile_occupant_map[tile]);
 	else:
-		if (shadow_type):
-			if (!unit_type_viable_for_tile(shadow_type, tile)):
+		if (unit_shadow_type):
+			if (!unit_type_viable_for_tile(unit_shadow_type, tile)):
 				print("Unit not viable for tile");
 				return;
-			if (try_place_unit(shadow_type, tile)):
-				shadow.queue_free();
-				shadow_type = null;
-				shadow = null;
+			if (try_place_unit(unit_shadow_type, tile)):
+				unit_shadow.queue_free();
+				unit_shadow_type = null;
+				unit_shadow = null;
 		else:
 			print("Click does not correspond to shadow");
 
+func try_apply_item(unit: Garrison, item_type: ItemType):
+	unit.apply_item(item_type);
+	Events.player_applied_item.emit(unit, item_type);
+	
 func try_place_unit(type: GridUnitType, tile: Vector2i) -> bool:
-	print("Attempt place " + str(type.id) + " at " + str(tile));
+	print("Attempt place " + str(type.type_id) + " at " + str(tile));
 	if (type.blocks_pathing() && !pathing.valid_path_if_tile_solid(tile)):
 		print("Attempt failed, no valid path after");
 		return false;
@@ -81,7 +104,7 @@ func try_place_unit(type: GridUnitType, tile: Vector2i) -> bool:
 	add_child(unit);
 	tile_occupant_map[tile] = unit;
 	pathing.update_tile(tile, fully_blocked_pathing(tile));
-	placed_unit.emit(type);
+	Events.player_placed_unit.emit(type);
 	return true;
 
 func fully_blocked_pathing(tile: Vector2i) -> bool:
@@ -106,16 +129,20 @@ func boot_pathing_cfg():
 func is_occupied(tile: Vector2i):
 	return tile_occupant_map.has(tile);
 
-func set_shadow(type: GridUnitType):
-	print("Map registered shadow");
-	shadow_type = type;
+func set_unit_shadow(type: GridUnitType):
+	print("Map registered unit shadow");
+	unit_shadow_type = type;
 	
 	var tile = map.get_mouse_pos_tile();
 	if (map.is_valid_tile(tile)):
 		hovering_tile(tile);
 
+func set_item_shadow(type: ItemType):
+	print("Map registered item shadow");
+	item_shadow_type = type;
+
 func _in_spawn_pathing_unit(type: UnitType):
-	print("Spawning type: " + type.id);
+	print("Spawning type: " + type.type_id);
 	var packed_scene =type.instance_template();
 	var enemy = packed_scene.instantiate();
 	enemy.type = type;
